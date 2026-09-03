@@ -1,0 +1,18 @@
+# Hugo build output and caches
+public/
+resources/
+.hugo_build.lock
+hugo_stats.json
+**/assets/jsconfig.json
+# Pagefind search index (built in CI)
+pagefind/
+static/pagefind/
+# Node
+node_modules/
+*.log
+# Env and OS
+.env
+.env.*
+.DS_Store
+._*
+Thumbs.db

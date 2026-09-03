@@ -1,0 +1,41 @@
+/* Site-specific styling. Signature: a highlighter mark, i.e. attention made visible. */
+:root {
+  --hl: #fde047;
+  --hl-soft: #fef3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --hl: #ca8a04; --hl-soft: #422006; }
+}
+html[data-theme="dark"], .dark { --hl: #ca8a04; --hl-soft: #422006; }
+
+/* Headings: Fraunces at a calmer weight than the template's font-black. */
+h1, h2, h3 { font-weight: 600 !important; letter-spacing: -0.012em; }
+
+/* Page and profile titles get the highlighter run-through. */
+main h1, section h1 {
+  display: inline;
+  text-decoration: underline;
+  text-decoration-color: var(--hl);
+  text-decoration-thickness: 0.32em;
+  text-underline-offset: -0.14em;
+  text-decoration-skip-ink: none;
+}
+
+/* Links in running text: thin underline, highlighter fill on hover. */
+.prose a:not(.btn) {
+  color: inherit;
+  text-decoration-color: var(--hl);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: background-color 120ms ease;
+}
+.prose a:not(.btn):hover { background-color: var(--hl-soft); text-decoration-color: transparent; }
+
+/* Citation lists: give each entry room to breathe. */
+.view-citation > div + div, .pub-list-item + .pub-list-item {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

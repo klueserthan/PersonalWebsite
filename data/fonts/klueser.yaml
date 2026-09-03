@@ -1,0 +1,26 @@
+hugoblox:
+  meta:
+    format: "hugoblox-font@1"
+    name: "Klueser"
+    style: "serif"
+  families:
+    heading: "Fraunces"
+    body: "IBM Plex Sans"
+    code: "IBM Plex Mono"
+    nav: "IBM Plex Sans"
+  weights:
+    heading: [500, 600]
+    body: [400, 500, 600]
+    code: [400]
+  leading:
+    heading: 1.15
+    body: 1.65
+    code: 1.5
+  tracking:
+    heading: "-0.012em"
+    body: "0"
+    caps: "0.06em"
+  variable:
+    heading: true
+    body: false
+    code: false
