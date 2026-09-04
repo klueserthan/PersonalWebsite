@@ -14,7 +14,7 @@ sections:
         folders: [events]
         tag: Invited
     design:
-      view: citation
+      view: talk-entry
   - block: collection
     content:
       title: Conference presentations
@@ -24,7 +24,8 @@ sections:
         folders: [events]
         tag: Conference
     design:
-      view: citation
+      view: talk-entry
+      show_location: true
   - block: collection
     content:
       title: Media
@@ -34,5 +35,5 @@ sections:
         folders: [events]
         tag: Media
     design:
-      view: citation
+      view: talk-entry
 ---

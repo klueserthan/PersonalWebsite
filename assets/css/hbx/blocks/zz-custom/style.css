@@ -39,3 +39,11 @@ main h1, section h1 {
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Anchor links (e.g. the "Research" nav item -> /#research) land under the sticky header without this. */
+.hbb-section { scroll-margin-top: 5rem; }
+
+/* CV page: "Print / Save as PDF" renders the page itself, chrome-free. */
+@media print {
+  .page-header, footer { display: none !important; }
+}

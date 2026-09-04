@@ -10,6 +10,12 @@ design:
 
 # Page sections
 sections:
+  - block: markdown
+    content:
+      title: ''
+      text: '{{< print-button >}}'
+    design:
+      columns: '1'
   - block: resume-experience
     content:
       username: me
@@ -20,14 +26,20 @@ sections:
       is_education_first: false
   - block: resume-skills
     content:
-      title: Skills & Hobbies
+      title: Skills & Methods
       username: me
+  - block: resume-awards
+    content:
+      title: Grants
+      username: me
+      icon_contains: banknotes
+    design:
+      accent: border-l-secondary-500
   - block: resume-awards
     content:
       title: Awards
       username: me
-  - block: resume-languages
-    content:
-      title: Languages
-      username: me
+      icon_contains: trophy
+    design:
+      accent: border-l-primary-500
 ---

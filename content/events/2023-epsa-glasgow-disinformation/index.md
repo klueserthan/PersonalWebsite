@@ -6,6 +6,7 @@ location: "Glasgow, Scotland"
 event_start: "2023-06-01T00:00:00Z"
 event_end: "2023-06-01T00:00:00Z"
 authors: [me]
+co_presenters: [Emma Hoes]
 tags: [Conference]
 summary: "Conference presentation"
 featured: false

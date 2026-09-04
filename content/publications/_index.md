@@ -27,12 +27,22 @@ sections:
       view: citation
   - block: collection
     content:
-      title: Working papers and public writing
+      title: Working papers and work in progress
       count: 0
       order: desc
       filters:
         folders: [publications]
         publication_type: article
+    design:
+      view: citation
+  - block: collection
+    content:
+      title: Public writing
+      count: 0
+      order: desc
+      filters:
+        folders: [publications]
+        publication_type: public-writing
     design:
       view: citation
 ---

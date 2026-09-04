@@ -59,19 +59,19 @@ education:
     start: 2015-09-01
     end: 2016-09-01
     summary: |
-      With Distinction, ranked 1st out of 32.
+      With Distinction.
   - degree: MA in Politics and Public Administration (Double Degree)
     institution: University of Konstanz
     start: 2015-04-01
     end: 2017-09-01
     summary: |
-      Specialized in policy analysis, agenda setting, and quantitative research methods. Final grade: excellent (1.1).
+      Specialized in policy analysis, agenda setting, and quantitative research methods.
   - degree: BA in Politics and Public Administration
     institution: University of Konstanz
     start: 2011-09-01
     end: 2015-03-01
     summary: |
-      Final grade: excellent (1.3). Includes an Erasmus exchange at the Department of Government, Uppsala University (2013-2014).
+      Includes an Erasmus exchange at the Department of Government, Uppsala University (2013-2014).
 
 experience:
   - role: Visiting Researcher
@@ -114,23 +114,15 @@ skills:
   - name: Methods
     items:
       - label: Text-as-data & NLP
-        level: 5
       - label: Time-series cross-section analysis
-        level: 5
       - label: Survey & online experiments
-        level: 4
       - label: Causal inference
-        level: 4
       - label: Process tracing
-        level: 3
   - name: Tools
     items:
       - label: R
-        level: 5
       - label: Python
-        level: 5
       - label: Stata
-        level: 3
 
 languages:
   - name: German
@@ -169,11 +161,6 @@ awards:
     awarder: Swiss National Science Foundation (SNSF Ambizione)
     date: "2024-01-01"
     summary: CHF 815,000 · Principal Investigator
-    icon: hero/banknotes
-  - title: Reisemittel für Auslandsaufenthalt
-    awarder: School of Business and Social Sciences, Aarhus University
-    date: "2024-01-01"
-    summary: EUR 4,021 · Travel grant for a research stay abroad
     icon: hero/banknotes
   - title: Replicating Foundational Online Survey Experiments
     awarder: University of Zurich

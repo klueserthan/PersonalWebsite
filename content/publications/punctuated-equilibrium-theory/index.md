@@ -15,6 +15,6 @@ tags:
   - "Political Attention"
 featured: false
 links:
-  - type: pdf
+  - type: doi
     url: "https://link.springer.com/referenceworkentry/10.1007/978-3-030-90434-0_79-1"
 ---
