@@ -48,6 +48,17 @@ main h1, section h1 {
   .page-header, footer { display: none !important; }
 }
 
+/* Course lists sit inside a markdown block, which clamps them to the prose
+   measure. Break out to the same width as the talks and publications lists
+   (max-w-3xl), staying centred on the parent's axis. */
+.course-list {
+  width: min(48rem, calc(100vw - 3rem));
+  max-width: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* The bio block hard-codes the avatar at 320px inline, which is wider than its
    4-of-12 column between the md and lg breakpoints, so it runs into the text. */
 .resume-biography .avatar-wrapper,
