@@ -31,7 +31,10 @@ main h1, section h1 {
 }
 .prose a:not(.btn):hover { background-color: var(--hl-soft); text-decoration-color: transparent; }
 
-/* Citation lists: give each entry room to breathe. */
+/* Citation lists: even spacing either side of the rule, matching the 0.75rem
+   above/below of the talks and teaching rows. The citation view sets a 1rem
+   bottom margin inline, which would otherwise push the rule off-centre. */
+.pub-list-item { margin-bottom: 0 !important; }
 .view-citation > div + div, .pub-list-item + .pub-list-item {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
