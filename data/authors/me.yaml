@@ -48,26 +48,32 @@ interests:
   - Platform governance & AI
 
 education:
+  # `year` is what the homepage biography cards show; the CV page formats
+  # `start`/`end` itself and ignores it.
   - degree: PhD in Political Science
     institution: Aarhus University
+    year: '2017–2020'
     start: 2017-09-01
     end: 2020-12-31
     summary: |
       Dissertation: "Beyond Portfolios: Bureaucratic Issue Attention in Coalition Governments."
   - degree: MSc in Comparative Social Policy
     institution: University of Oxford
+    year: '2015–2016'
     start: 2015-09-01
     end: 2016-09-01
     summary: |
       With Distinction.
   - degree: MA in Politics and Public Administration (Double Degree)
     institution: University of Konstanz
+    year: '2015–2017'
     start: 2015-04-01
     end: 2017-09-01
     summary: |
       Specialized in policy analysis, agenda setting, and quantitative research methods.
   - degree: BA in Politics and Public Administration
     institution: University of Konstanz
+    year: '2011–2015'
     start: 2011-09-01
     end: 2015-03-01
     summary: |

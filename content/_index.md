@@ -35,7 +35,7 @@ sections:
 
         That question runs through three lines of work. In the executive, I look at how bureaucratic structures shape what governments can attend to and translate into law. In party systems, I ask why four decades of rising economic inequality have produced so little political response, work that is becoming the book *Lost in Transmission* (Cambridge University Press, with Alexander Horn and Leo Ahrens). On digital platforms, I follow the migration of attention to actors with no formal role in democratic politics: influencers, recommendation systems, content moderation regimes, and now AI-generated media.
 
-        Methodologically I mostly work with text-as-data and multimodal classification, survey and online experiments, and time-series cross-section data, with qualitative process tracing where mechanisms inside institutions are at stake.
+        Methodologically I mostly work with text-as-data and multimodal classification, survey and online experiments, and time-series cross-section data.
     design:
       columns: '1'
 ---
