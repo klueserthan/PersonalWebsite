@@ -35,6 +35,8 @@ cascade:
       kind: page
     params:
       reading_time: false
+      # Social share buttons off site-wide.
+      share: false
   # Term listings (/tags/…, /publication_types/…) render the card view, which
   # reads its own `show_read_time` page param rather than the one above.
   - target:
