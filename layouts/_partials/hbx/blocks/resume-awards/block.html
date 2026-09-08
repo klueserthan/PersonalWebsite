@@ -19,7 +19,7 @@
 
 {{ with $awards }}
   <section>
-    {{ with $content.title }}<h2 class="eyebrow">{{ . }}</h2>{{ end }}
+    {{ with $content.title }}<h2 class="section-title">{{ . }}</h2>{{ end }}
     <ul class="ledger">
       {{ range sort . "date_sort" "desc" }}
         <li class="ledger-row">

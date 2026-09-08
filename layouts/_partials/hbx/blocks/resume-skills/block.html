@@ -1,5 +1,5 @@
 {{/* Project override of Hugo Blox' "Skills": one ledger row per group, the
-     group name in the monospace gutter and its items set as tokens. */}}
+     group name in the gutter and its items set as a plain list. */}}
 
 {{ $block := .wcBlock }}
 {{ $content := $block.content | default dict }}
@@ -7,13 +7,13 @@
 
 {{ with $profile.skills }}
   <section>
-    {{ with $content.title }}<h2 class="eyebrow">{{ . }}</h2>{{ end }}
+    {{ with $content.title }}<h2 class="section-title">{{ . }}</h2>{{ end }}
     <ul class="ledger">
       {{ range . }}
         <li class="ledger-row">
           <span class="ledger-key">{{ .name }}</span>
           <span class="ledger-value">
-            <ul class="tokens">
+            <ul class="plainlist">
               {{ range .items }}<li>{{ .label | default .name }}</li>{{ end }}
             </ul>
           </span>

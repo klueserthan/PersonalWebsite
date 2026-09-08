@@ -20,7 +20,7 @@
 
   {{ with $experience }}
     <section>
-      <h2 class="eyebrow">{{ i18n "experience" | default "Experience" }}</h2>
+      <h2 class="section-title">{{ i18n "experience" | default "Experience" }}</h2>
       <ul class="ledger ledger--dates">
         {{ range . }}
           <li class="ledger-row">
@@ -40,7 +40,7 @@
 
   {{ with $education }}
     <section>
-      <h2 class="eyebrow">{{ i18n "education" | default "Education" }}</h2>
+      <h2 class="section-title">{{ i18n "education" | default "Education" }}</h2>
       <ul class="ledger ledger--dates">
         {{ range . }}
           <li class="ledger-row">

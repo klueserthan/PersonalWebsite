@@ -83,7 +83,7 @@
 
   {{ with $profile.education }}
     <section class="masthead-section">
-      <h2 class="eyebrow">{{ $headings.education | default (i18n "education") }}</h2>
+      <h2 class="section-title">{{ $headings.education | default (i18n "education") }}</h2>
       <ul class="ledger">
         {{ range . }}
           <li class="ledger-row">
@@ -99,12 +99,4 @@
     </section>
   {{ end }}
 
-  {{ with $profile.interests }}
-    <section class="masthead-section">
-      <h2 class="eyebrow">{{ $headings.interests | default (i18n "interests") }}</h2>
-      <ul class="tokens">
-        {{ range . }}<li>{{ . | markdownify | emojify }}</li>{{ end }}
-      </ul>
-    </section>
-  {{ end }}
 </div>

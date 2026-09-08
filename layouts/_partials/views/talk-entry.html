@@ -1,27 +1,27 @@
-{{/* Talk/media list entry: title, then venue, place and date in the monospace
-     register the rest of the site uses for dates and sources. No name-first
-     citation, no link — talks have no landing page worth visiting. */}}
+{{/* Talk / media list entry. The date sits in the ledger's gutter because these
+     lists are ordered by it; venue and place read as a phrase after the title.
+     No name-first citation, no link — talks have no landing page worth
+     visiting. */}}
 {{ $item := .item }}
 {{ $page := .page }}
 
 {{ $show_location := false }}
 {{ with $page.design }}{{ $show_location = (.show_location | default false) }}{{ end }}
 
-{{ $display_date := $item.Params.event_start | default $item.Date }}
-{{ $date_str := "" }}
-{{ with $display_date }}{{ $date_str = (time .) | time.Format "January 2006" }}{{ end }}
+{{ $date := $item.Params.event_start | default $item.Date }}
+{{ $where := slice }}
+{{ with $item.Params.event_name }}{{ $where = $where | append (. | markdownify) }}{{ end }}
+{{ if $show_location }}{{ with $item.Params.location }}{{ $where = $where | append (. | markdownify) }}{{ end }}{{ end }}
 
-{{ $meta := slice }}
-{{ with $item.Params.event_name }}{{ $meta = $meta | append (. | markdownify) }}{{ end }}
-{{ if $show_location }}{{ with $item.Params.location }}{{ $meta = $meta | append (. | markdownify) }}{{ end }}{{ end }}
-{{ with $date_str }}{{ $meta = $meta | append . }}{{ end }}
-
-<div class="talk-entry">
-  <div class="talk-entry-title">{{ $item.Title | markdownify }}</div>
-  <div class="talk-entry-meta">
-    {{ delimit $meta " · " | safeHTML }}
-    {{ with $item.Params.co_presenters }}
-      <span class="whitespace-nowrap">&nbsp;· with {{ delimit . ", " }}</span>
+<li class="ledger-row">
+  <span class="ledger-key">{{ with $date }}{{ (time .) | time.Format "January 2006" }}{{ end }}</span>
+  <span class="ledger-value">
+    <span class="ledger-title">{{ $item.Title | markdownify }}</span>
+    {{ if or $where $item.Params.co_presenters }}
+      <span class="ledger-sub">
+        {{- delimit $where ", " | safeHTML -}}
+        {{- with $item.Params.co_presenters }}{{ if $where }}, {{ end }}with {{ delimit . ", " }}{{ end -}}
+      </span>
     {{ end }}
-  </div>
-</div>
+  </span>
+</li>

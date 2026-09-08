@@ -1,53 +1,57 @@
 # Theme pack: "Agenda"
 #
 # The site is about political attention — which problems get onto an agenda and
-# which are ignored. So the palette spends colour the way the subject says
+# which are ignored. The palette spends colour the way the subject says
 # attention gets spent: almost nothing, then one unmistakable mark.
 #
-#   ink      near-black with a faint warm cast, so it sits with the marker
-#   paper    off-white, a whisper warm — highlighter on paper, not a UI badge
-#   marker   #FFD400, the accent, applied by hand in zz-custom/style.css
+#   ink      #15181c, a blue-black that carries an actual hue
+#   paper    #f8f9fa, near-white with a faint blue-grey cast
+#   marker   #ffd60a, the accent, applied by hand in zz-custom/style.css
 #
-# `primary` is the ink of each mode, not the marker: every accent the kit paints
-# on its own (nav hover, badges, resume rules) then lands as quiet graphite, and
-# the yellow only appears where this design puts it deliberately.
+# The neutrals lean blue on purpose: it is the accent's complement, so the
+# yellow reads as a highlighter laid on office paper rather than as a warm
+# editorial ground with a warm accent sitting in it.
+#
+# `primary` is the ink of each mode, not the marker. Every accent the kit paints
+# on its own — nav hover, badges, resume rules — then lands as quiet graphite,
+# and the yellow only appears where this design puts it deliberately.
 
 hugoblox:
   meta:
     format: "hugoblox-theme@1"
     name: "Agenda"
     vendor: "klueser"
-    version: "1.0.0"
+    version: "2.0.0"
     license: "MIT"
 
   type: "dual"
 
   light:
     colors:
-      primary: "#1a1a17"    # ink
-      secondary: "#ffd400"  # marker
-      neutral: "#6c6a64"    # remaps every text-gray-*/bg-gray-* to a warm grey
+      primary: "#15181c"    # ink
+      secondary: "#ffd60a"  # marker
+      neutral: "#5c646e"    # remaps every text-gray-*/bg-gray-* to a blue-grey
     surfaces:
-      background: "#fbfaf8"
-      foreground: "#1a1a17"
+      background: "#f8f9fa"
+      foreground: "#15181c"
       header:
-        background: "#fbfaf8"
-        foreground: "#1a1a17"
+        background: "#f8f9fa"
+        foreground: "#15181c"
       footer:
-        background: "#fbfaf8"
-        foreground: "#6c6a64"
+        background: "#f8f9fa"
+        foreground: "#5c646e"
 
   dark:
     colors:
-      primary: "#edece7"    # ink, inverted
-      secondary: "#ffd400"
-      neutral: "#8a877e"
+      primary: "#e8eaed"    # ink, inverted
+      secondary: "#ffd60a"
+      neutral: "#8d959f"
     surfaces:
-      background: "#0f0f0e"
-      foreground: "#edece7"
+      background: "#12161b"
+      foreground: "#e8eaed"
       header:
-        background: "#0f0f0e"
-        foreground: "#edece7"
+        background: "#12161b"
+        foreground: "#e8eaed"
       footer:
-        background: "#0f0f0e"
-        foreground: "#8a877e"
+        background: "#12161b"
+        foreground: "#8d959f"

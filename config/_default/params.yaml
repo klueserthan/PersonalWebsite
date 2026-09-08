@@ -70,7 +70,7 @@ hugoblox:
     # Border radius: 'none', 'sm', 'md', 'lg', or 'full'
     radius: "none"
     # Spacing density: 'compact', 'comfortable', or 'spacious'
-    spacing: "spacious"
+    spacing: "comfortable"
     # Avatar shape in author profiles
     avatar_shape: square # circle | square | rounded
 
@@ -106,7 +106,7 @@ hugoblox:
     style: minimal # minimal | columns | centered
     language_switcher: false
     # Custom footer text (HTML supported)
-    text: "Department of Political Science, University of Zurich · Funded by an SNSF Ambizione grant"
+    text: "Department of Political Science, University of Zurich. Funded by an SNSF Ambizione grant."
 
   # ────────────────────────────────────────────────────────────────────────────
   # COPYRIGHT
