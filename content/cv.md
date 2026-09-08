@@ -21,7 +21,7 @@ sections:
       username: me
     design:
       # Hugo date format
-      date_format: 'January 2006'
+      date_format: 'Jan 2006'
       # Education or Experience section first?
       is_education_first: false
   - block: resume-skills
@@ -33,13 +33,9 @@ sections:
       title: Grants
       username: me
       icon_contains: banknotes
-    design:
-      accent: border-l-secondary-500
   - block: resume-awards
     content:
       title: Awards
       username: me
       icon_contains: trophy
-    design:
-      accent: border-l-primary-500
 ---

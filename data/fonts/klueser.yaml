@@ -1,26 +1,39 @@
+# Font pack: one family, Newsreader, worked hard.
+#
+# Newsreader is a newspaper serif drawn for screens. It is the site's only
+# typeface because it is also its subject: this is a researcher who studies how
+# news media allocate political attention, so the site is set in news type.
+# Optical size and weight do the display/text separation a second family would
+# otherwise do, and the true italic carries the journal names in every citation.
+#
+# The weights below are only what the kit's own Google Fonts request needs; the
+# real font — variable roman plus a genuine italic, which the kit cannot ask for
+# — is loaded in layouts/_partials/hooks/head-end/fonts.html, which runs after
+# and wins the cascade.
 hugoblox:
   meta:
     format: "hugoblox-font@1"
     name: "Klueser"
     style: "serif"
   families:
-    heading: "Fraunces"
-    body: "IBM Plex Sans"
+    heading: "Newsreader"
+    body: "Newsreader"
     code: "IBM Plex Mono"
-    nav: "IBM Plex Sans"
+    nav: "Newsreader"
   weights:
-    heading: [500, 600]
-    body: [400, 500, 600]
+    heading: [600, 500]
+    body: [400, 600]
     code: [400]
+    nav: [400]
   leading:
-    heading: 1.15
-    body: 1.65
+    heading: 1.1
+    body: 1.62
     code: 1.5
   tracking:
-    heading: "-0.012em"
+    heading: "-0.014em"
     body: "0"
-    caps: "0.06em"
+    caps: "0.02em"
   variable:
-    heading: true
+    heading: false
     body: false
     code: false

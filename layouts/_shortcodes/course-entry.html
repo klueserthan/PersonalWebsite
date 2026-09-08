@@ -1,20 +1,18 @@
-{{/* One course row: title, then institution · term · role, matching views/talk-entry.html. */}}
-{{ $meta := slice }}
-{{ with .Get "institution" }}{{ $meta = $meta | append . }}{{ end }}
-{{ with .Get "term" }}{{ $meta = $meta | append . }}{{ end }}
-{{ with .Get "role" }}{{ $meta = $meta | append . }}{{ end }}
-{{ $syllabus := .Get "syllabus" }}
+{{/* One course row: term in the gutter, then the course and who taught it
+     where, as a sentence. */}}
+{{ $role := .Get "role" }}
+{{ $institution := .Get "institution" }}
 {{ $summary := trim .Inner "\n" }}
 
-<div class="py-3">
-  <div class="font-semibold text-gray-900 dark:text-white">{{ .Get "title" }}</div>
-  <div class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-    {{ delimit $meta " · " }}
-    {{ with $syllabus }}
-      <span>&nbsp;· <a href="{{ . }}" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-300 hover:underline">Syllabus</a></span>
-    {{ end }}
-  </div>
-  {{ with $summary }}
-  <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ . }}</div>
-  {{ end }}
-</div>
+<li class="ledger-row">
+  <span class="ledger-key">{{ .Get "term" }}</span>
+  <span class="ledger-value">
+    <span class="ledger-title">{{ .Get "title" }}</span>
+    <span class="ledger-sub">
+      {{- with $role }}{{ . }}{{ if $institution }}, {{ end }}{{ end -}}
+      {{- with $institution }}{{ . }}{{ end -}}
+      {{- with .Get "syllabus" }} (<a href="{{ . }}" target="_blank" rel="noopener">syllabus</a>){{ end -}}
+    </span>
+    {{ with $summary }}<span class="ledger-note">{{ . }}</span>{{ end }}
+  </span>
+</li>

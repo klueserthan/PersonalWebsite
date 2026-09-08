@@ -1,0 +1,18 @@
+{{/* Project override of the kit's author list.
+
+     Author profile pages are deliberately not rendered (content/authors/_index.md
+     sets `build.render: never`), but the kit still looked the term page up and
+     linked to it — producing `<a href="">` on the publications list, which
+     reloads the page and reads as a broken link to a screen reader. Names are
+     plain text here. Restore the kit's version if author pages are ever
+     published; the `author_notes` tooltip it carries is unused on this site. */}}
+
+{{- $authors := .Params.authors -}}
+{{- if $authors -}}
+  {{- if not (reflect.IsSlice $authors) }}{{ $authors = slice $authors }}{{ end -}}
+  {{- range $index, $raw := $authors -}}
+    {{- $profile := partial "functions/get_author_profile" (dict "slug" ($raw | urlize) "title" $raw) -}}
+    {{- if gt $index 0 }}, {{ end -}}
+    <span>{{ $profile.title | default $raw }}</span>
+  {{- end -}}
+{{- end -}}

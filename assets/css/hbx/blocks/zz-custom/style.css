@@ -1,90 +1,804 @@
-/* Site-specific styling. Signature: a highlighter mark, i.e. attention made visible. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   "Agenda" — site styling for jonathanklueser.com
+   ═══════════════════════════════════════════════════════════════════════════
+
+   One typeface, one accent, one left margin. Everything else is air.
+
+   Newsreader carries the whole site because it is also the subject: this is a
+   researcher who studies how news media allocate political attention. Optical
+   size, weight and the true italic do the work a second family would otherwise
+   do, so nothing here needs a separate face for headings, labels or data.
+
+   The yellow is a highlighter, not a UI colour. It marks only what has actually
+   been given attention: the name, the page title, the current item in the nav,
+   a link under the cursor.
+
+   This file is concatenated last into the Tailwind entry point, so its
+   unlayered rules beat the kit's @layer utilities without !important.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --hl: #fde047;
-  --hl-soft: #fef3c7;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --hl: #ca8a04; --hl-soft: #422006; }
-}
-html[data-theme="dark"], .dark { --hl: #ca8a04; --hl-soft: #422006; }
+  /* Ground and ink come from the theme pack (data/themes/klueser.yaml); these
+     are the tokens the pack cannot express. */
+  --paper: #f8f9fa;
+  --ink: #15181c;
+  --muted: #5c646e;
+  --rule: #dde1e5;
+  --marker: #ffd60a;
+  --marker-soft: #fff3b8;
+  --marker-ink: #15181c; /* text sitting on the marker */
 
-/* Headings: Fraunces at a calmer weight than the template's font-black. */
-h1, h2, h3 { font-weight: 600 !important; letter-spacing: -0.012em; }
+  /* On light paper the marker is a tint behind dark ink: it reads 1.3:1 against
+     the page while the text on it stays at 12.6:1 — what a highlighter does.
+     It overlaps the letters on purpose. */
+  --mark-thickness: 0.36em;
+  --mark-offset: 84%;
+  --mark-pad: 0;
 
-/* Page and profile titles get the highlighter run-through. */
-main h1, section h1 {
+  /* Major third (1.25) from a 19px body. */
+  --t-xs: 0.76rem;
+  --t-sm: 0.95rem;
+  --t-base: 1.1875rem;
+  --t-md: 1.485rem;
+  --t-lg: 1.855rem;
+  --t-xl: 2.32rem;
+
+  --measure: 39rem; /* ≈68 characters of Newsreader at 19px */
+  --column: 52rem;  /* ruled lists run wider than running text */
+  --gutter: 8.5rem; /* the date column on chronological lists */
+  --rail: max(1.5rem, calc((100% - 72rem) / 2));
+}
+
+/* Dark mode is keyed to `.dark` alone, never to `prefers-color-scheme`. The
+   kit's theme engine and every `dark:` Tailwind variant switch on that class,
+   which its script sets from the system preference or the toggle. A media query
+   here would flip the ground dark while the kit's utilities stayed light —
+   near-black link text on a near-black page. */
+html.dark {
+  --paper: #12161b;
+  --ink: #e8eaed;
+  --muted: #8d959f;
+  --rule: #252b33;
+  --marker: #ffd60a;
+  --marker-soft: #3d3208;
+
+  /* That inverts on a dark ground: the yellow reads 12.9:1 against the page,
+     but light ink laid over it collapses to 1.2:1 and the bottoms of the
+     letters disappear. So the marker steps out from behind the text and sits
+     under it as a rule — the type and the mark each keep their contrast. */
+  --mark-thickness: 0.1em;
+  --mark-offset: 100%;
+  --mark-pad: 0.12em;
+}
+
+/* ── Foundations ────────────────────────────────────────────────────────── */
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--t-base);
+  font-optical-sizing: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--marker);
+  color: var(--marker-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--marker);
+  outline-offset: 3px;
+}
+
+/* Section headings are headings, not labels: same family, sentence case, at the
+   rail. `.text-3xl.font-bold` is what the kit's markdown and collection blocks
+   emit for a block title. */
+.section-title,
+.hbb-section .text-3xl.font-bold {
+  font-size: var(--t-md);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 1.75rem;
+}
+
+/* ── The rail ───────────────────────────────────────────────────────────── */
+
+/* Every block upstream centres itself in a box of its own width, so titles,
+   prose and lists each start at a different x. This design has one left margin
+   and everything hangs off it. */
+
+.hbb-section {
+  padding-inline: var(--rail);
+  scroll-margin-top: 4.5rem;
+}
+
+.hbb-section > div:not(.home-section-bg),
+.masthead {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.hbb-section .max-w-prose {
+  align-items: flex-start;
+  margin-inline: 0;
+  padding-inline: 0;
+  max-width: var(--measure);
+}
+
+.hbb-section > .flex.flex-col.items-center {
+  align-items: flex-start;
+  padding-inline: 0;
+}
+
+/* Ruled lists run wider than running text. `.course-list` sits inside a
+   markdown block already clamped to the measure, so it overflows to the right
+   of its parent rather than re-centring — the rail stays the left edge. */
+.hbb-section .container.max-w-3xl,
+.list-column,
+.course-list {
+  width: min(var(--column), calc(100vw - 3rem));
+  max-width: none;
+  margin-inline: 0;
+  margin-top: 0;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.page-header nav {
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+  padding-block: 0.85rem;
+}
+
+.page-header nav a,
+.page-header nav button {
+  font-family: var(--hb-font-nav);
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--muted);
+  transition: color 120ms ease;
+}
+
+.page-header nav a:hover,
+.page-header nav button:hover {
+  color: var(--ink);
+}
+
+/* The current page carries the marker — the one item on the agenda. */
+.page-header nav a.active {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--marker);
+  padding-bottom: 1px;
+}
+
+.page-header nav .theme-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ── The marker ─────────────────────────────────────────────────────────── */
+
+.mark {
   display: inline;
-  text-decoration: underline;
-  text-decoration-color: var(--hl);
-  text-decoration-thickness: 0.32em;
-  text-underline-offset: -0.14em;
-  text-decoration-skip-ink: none;
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% var(--mark-thickness);
+  background-position: 0 var(--mark-offset);
+  padding-inline: 0.05em;
+  padding-bottom: var(--mark-pad);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-/* Links in running text: thin underline, highlighter fill on hover. */
-.prose a:not(.btn) {
+/* ── Masthead (homepage biography block) ────────────────────────────────── */
+
+.masthead-top {
+  display: grid;
+  gap: 2.5rem 3rem;
+  grid-template-columns: 1fr;
+  align-items: end;
+  padding-bottom: 2.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 820px) {
+  .masthead-top {
+    grid-template-columns: minmax(0, 1fr) 14rem;
+  }
+}
+
+.masthead-name {
+  font-size: clamp(2.9rem, 7.5vw, 5rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  margin: 0;
+}
+
+.masthead-role {
+  font-size: var(--t-md);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 1.5rem 0 0;
+}
+
+.masthead-affiliations {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0.45rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-affiliations a {
   color: inherit;
-  text-decoration-color: var(--hl);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.masthead-affiliations a:hover {
+  text-decoration-color: var(--marker);
+}
+
+.masthead-portrait {
+  width: 100%;
+  max-width: 14rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.03);
+  transition: filter 240ms ease;
+}
+
+.masthead-portrait:hover {
+  filter: grayscale(0%);
+}
+
+.masthead-bio {
+  max-width: var(--measure);
+  margin-top: 2.75rem;
+  color: var(--ink);
+}
+
+.masthead-bio p {
+  margin: 0 0 1.1em;
+}
+
+.masthead-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2rem;
+  margin-top: 2.25rem;
+}
+
+.masthead-links {
+  display: flex;
+  gap: 1.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-links a {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 120ms ease;
+}
+
+.masthead-links a:hover {
+  color: var(--ink);
+}
+
+.linkicon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* One button shape site-wide: a ruled box the marker fills on hover. */
+.linkbtn,
+.print-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--t-sm);
+  color: var(--ink);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  text-decoration: none;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.linkbtn:hover,
+.print-button:hover {
+  background: var(--marker);
+  border-color: var(--marker);
+  color: var(--marker-ink);
+}
+
+.masthead-section {
+  margin-top: 3.5rem;
+}
+
+/* ── Ledger: a ruled list with a date in the gutter ──────────────────────── */
+
+/* The gutter carries the year because these lists are ordered by it. Lists
+   that are not chronological (skills) use the same component without one. */
+
+.ledger {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: var(--column);
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.2rem 2rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.ledger-row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 640px) {
+  .ledger-row {
+    grid-template-columns: var(--gutter) minmax(0, 1fr);
+  }
+}
+
+.ledger--dates {
+  --gutter: 10.5rem;
+}
+
+.ledger-key {
+  font-size: var(--t-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  padding-top: 0.28rem;
+}
+
+/* Date spans stay on one line — the wider gutter is sized for them. Everything
+   else (a term like "Fall 2021 & Spring 2022") wraps rather than running into
+   the title column. */
+.ledger--dates .ledger-key {
+  white-space: nowrap;
+}
+
+.ledger-value {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.ledger-title {
+  font-weight: 600;
+}
+
+.ledger-sub,
+.ledger-note {
+  color: var(--muted);
+}
+
+.ledger-note {
+  font-size: var(--t-sm);
+  line-height: 1.55;
+  max-width: var(--measure);
+}
+
+.ledger-note p {
+  margin: 0;
+}
+
+.ledger-title a,
+.ledger-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.ledger-title a:hover,
+.ledger-note a:hover {
+  text-decoration-color: var(--marker);
+}
+
+/* Plain lists — skills, methods, tools. No boxes. */
+.plainlist {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+}
+
+.plainlist li {
+  display: inline;
+}
+
+.plainlist li:not(:last-child)::after {
+  content: ",\00a0";
+}
+
+/* ── Running text ───────────────────────────────────────────────────────── */
+
+.prose {
+  color: var(--ink);
+  max-width: var(--measure);
+  font-size: var(--t-base);
+  line-height: 1.62;
+}
+
+.prose :where(h1, h2, h3, h4) {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.prose a:not(.linkbtn):not(.btn) {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--marker);
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
   transition: background-color 120ms ease;
 }
-.prose a:not(.btn):hover { background-color: var(--hl-soft); text-decoration-color: transparent; }
 
-/* Citation lists: even spacing either side of the rule, matching the 0.75rem
-   above/below of the talks and teaching rows. The citation view sets a 1rem
-   bottom margin inline, which would otherwise push the rule off-centre. */
-.pub-list-item { margin-bottom: 0 !important; }
-.view-citation > div + div, .pub-list-item + .pub-list-item {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+.prose a:not(.linkbtn):not(.btn):hover {
+  background-color: var(--marker-soft);
+  text-decoration-color: transparent;
 }
 
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-/* Anchor links (e.g. the "Research" nav item -> /#research) land under the sticky header without this. */
-.hbb-section { scroll-margin-top: 5rem; }
-
-/* CV page: "Print / Save as PDF" renders the page itself, chrome-free. */
-@media print {
-  .page-header, footer { display: none !important; }
+.prose mark {
+  background: var(--marker);
+  color: var(--marker-ink);
+  border-radius: 0;
+  padding: 0.05em 0.15em;
 }
 
-/* Course lists sit inside a markdown block, which clamps them to the prose
-   measure. Break out to the same width as the talks and publications lists
-   (max-w-3xl), staying centred on the parent's axis. */
-.course-list {
-  width: min(48rem, calc(100vw - 3rem));
+/* ── Page ledes and article headers ─────────────────────────────────────── */
+
+.page-lede {
+  padding-inline: var(--rail);
+  padding-top: 5rem;
+}
+
+.page-lede h1 {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+
+.page-lede p {
+  max-width: var(--measure);
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+}
+
+/* The lede supplies the top air; the first block below it needs less. */
+.page-lede + .hbb-section {
+  padding-top: 3.5rem;
+}
+
+/* Article pages (publications, posts) ship with the kit's three-column docs
+   shell: a nav sidebar, the article, and a table of contents. This site has no
+   docs, so on a publication page both side columns render empty and still hold
+   512px of the width — which pushed the article ~190px right of the rail every
+   other page starts on. Put the article back on the rail and drop the columns
+   that have nothing in them. */
+
+.page-body > .mx-auto.flex.max-w-screen-xl {
   max-width: none;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  padding-inline: var(--rail);
 }
 
-/* The bio block hard-codes the avatar at 320px inline, which is wider than its
-   4-of-12 column between the md and lg breakpoints, so it runs into the text. */
-.resume-biography .avatar-wrapper,
-.resume-biography img.avatar {
-  max-width: 100%;
-  height: auto !important;
-  aspect-ratio: 1 / 1;
+/* The nav sidebar is a collapsed docs tree with no visible content here. */
+.page-body .hb-sidebar-container {
+  display: none;
 }
 
-/* "What I work on" continues the biography's text column rather than sitting
-   centred under it: same 12-column grid, same 4-column offset. */
+/* The table of contents earns its column only when the page has headings. */
+.hb-toc:not(:has(a)) {
+  display: none;
+}
+
+.page-body > .mx-auto.flex.max-w-screen-xl > article {
+  justify-content: flex-start;
+  padding-right: 0;
+}
+
+.page-body > .mx-auto.flex.max-w-screen-xl > article > main {
+  max-width: var(--column);
+  padding-inline: 0;
+}
+
+/* Everything below the article was centred or right-aligned against a centred
+   column. On a left-aligned one it reads as adrift, so it follows the rail. */
+article main .flex.justify-center,
+article main .flex > .place-self-center {
+  justify-content: flex-start;
+  place-self: start;
+}
+
+article main .ltr\:text-right {
+  text-align: left;
+}
+
+article main > .container.mx-auto {
+  margin-inline: 0;
+  max-width: var(--column);
+}
+
+/* The byline puts a 16px avatar beside any author who has one — which here is
+   only the site owner, so it read as a badge on one name in a list of equals.
+   The author card lower down (h-24) keeps its portrait. */
+article main .h-4.w-4.rounded-full {
+  display: none;
+}
+
+/* The kit emits a comma only before authors that have no avatar, leaning on the
+   portrait to separate the rest. With the portrait gone, that separator has to
+   be uniform: drop the conditional one and give every name but the last its
+   own. The flex gap only existed to hold the avatar off the name. */
+article main .mt-4 span.mr-1 {
+  display: none;
+}
+
+article main .mt-4 .group {
+  gap: 0;
+  margin-inline: 0 0.3em; /* the kit's two-sided margin held the avatar off */
+}
+
+article main .mt-4 .group:not(:last-child)::after {
+  content: ",";
+}
+
+/* Publication metadata reads as a ledger: field name in the same gutter the
+   rest of the site uses, value beside it. The kit's 200px label column left the
+   abstract about 48 characters wide. */
+article .max-w-prose.grid {
+  max-width: var(--column);
+}
+
 @media (min-width: 768px) {
-  #research > div:not(.home-section-bg) {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 2rem;
-    /* The bio puts its px-4 on the section, outside the max-w-7xl box; here both
-       live on one element, so the cap has to include the padding to line up. */
-    max-width: calc(80rem + 2rem);
-    margin-inline: auto;
-    padding-inline: 1rem;
+  article .max-w-prose.grid {
+    grid-template-columns: var(--gutter) minmax(0, 1fr);
   }
-  #research > div:not(.home-section-bg) > * {
-    grid-column: 5 / -1;
+}
+
+article main > h1 {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% var(--mark-thickness);
+  background-position: 0 var(--mark-offset);
+  padding-bottom: var(--mark-pad);
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Publication metadata: "Abstract", "Type", "Publication" are field names, so
+   they stay quiet and sit beside their values rather than shouting above them. */
+article .grid > .font-bold.text-2xl {
+  font-size: var(--t-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+  padding-top: 0.35rem;
+}
+
+/* The Status row ("Peer-reviewed" / "Open access") comes off the page. Whether
+   an article is peer reviewed is already carried by the section it sits under
+   on the Publications page and by the Type row above. The `peer_reviewed` and
+   `open_access` params stay in the front matter — they are true, they are set
+   per publication, and nothing else in the kit reads them — so this hides the
+   row rather than deleting the data.
+
+   Both grid cells go: the value cell holds the badge, and `:has(+ ...)` reaches
+   back to the label cell that precedes it. Keyed on `emerald`, which nothing
+   else on the site uses. */
+article .max-w-prose.grid > div:has(> span[class*="emerald"]),
+article .max-w-prose.grid > div:has(+ div > span[class*="emerald"]) {
+  display: none;
+}
+
+/* Tags: text, not pills. */
+article a[href*="/tags/"] {
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--muted);
+  font-size: var(--t-sm);
+  font-style: italic;
+  padding: 0;
+  margin-right: 1.25rem;
+  transition: color 120ms ease;
+}
+
+/* The kit's one remaining tracked-out caps label, above the author card. */
+article .uppercase {
+  text-transform: none;
+  font-size: var(--t-sm);
+  letter-spacing: 0;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+article a[href*="/tags/"] {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+article a[href*="/tags/"]:hover {
+  color: var(--ink);
+  text-decoration-color: var(--marker);
+}
+
+/* ── Publication lists ──────────────────────────────────────────────────── */
+
+.view-citation {
+  max-width: var(--column);
+}
+
+.pub-list-item {
+  margin-bottom: 0;
+  line-height: 1.55;
+}
+
+.pub-list-item .pub-icon {
+  display: none;
+}
+
+.view-citation > div + div,
+.pub-list-item + .pub-list-item {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.pub-list-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 120ms ease;
+}
+
+.pub-list-item a:hover {
+  text-decoration-color: var(--marker);
+  text-decoration-thickness: 2px;
+}
+
+.li-cite-author {
+  color: var(--muted);
+}
+
+/* DOI / CITE / PDF links. `.dark .hb-attachment-link` upstream is two classes,
+   so match its weight to win in both modes. */
+.hb-attachment-link,
+html.dark .hb-attachment-link {
+  font-size: var(--t-sm);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.hb-attachment-link:hover,
+html.dark .hb-attachment-link:hover {
+  color: var(--ink);
+  text-decoration-color: var(--marker);
+}
+
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+
+/* Centred in the kit; here it sits under the list it pages, at the rail. */
+.hbb-section nav > ul.container.mx-auto {
+  justify-content: flex-start;
+  margin-inline: 0;
+  max-width: var(--column);
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
+.hbb-section nav > ul.container.mx-auto li {
+  padding: 0;
+}
+
+.page-link {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 4px;
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+.page-link:hover {
+  color: var(--ink);
+  text-decoration-color: var(--marker);
+}
+
+/* ── CV page ────────────────────────────────────────────────────────────── */
+
+.cv-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: var(--column);
+}
+
+.cv-stack--education-first {
+  flex-direction: column-reverse;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+
+/* The colophon sits at the left margin like everything else, not centred. */
+footer {
+  width: 100%;
+  max-width: none;
+  margin: 6rem 0 0;
+  padding: 2.25rem 0 0;
+  padding-inline: var(--rail);
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: var(--t-sm);
+  line-height: 1.8;
+}
+
+footer p {
+  text-align: left;
+  margin: 0;
+  max-width: var(--column);
+}
+
+footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+footer a:hover {
+  text-decoration-color: var(--marker);
+}
+
+@media print {
+  .page-header,
+  footer,
+  .print-button {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none;
+    animation: none;
   }
 }

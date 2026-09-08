@@ -7,13 +7,6 @@ design:
 sections:
   - block: markdown
     content:
-      title: 'Teaching'
-      text: |-
-        <!-- TODO: teaching philosophy paragraph -->
-    design:
-      columns: '1'
-  - block: markdown
-    content:
       title: 'MA-level courses'
       text: |-
         {{< course-list >}}

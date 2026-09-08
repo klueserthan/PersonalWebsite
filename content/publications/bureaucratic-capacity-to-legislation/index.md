@@ -30,5 +30,5 @@ links:
 awards:
   - name: "Gordon Smith and Vincent Wright Memorial Prize"
     awarder: "West European Politics"
-    date: "2023-01-01"
+    date: "2023"
 ---

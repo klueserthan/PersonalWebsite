@@ -1,0 +1,83 @@
+{{/* Project override of Hugo Blox' "Biography 3".
+
+     Renders the author-profile data as a plain left-aligned masthead — name,
+     portrait, bio, links — instead of the kit's gradient buttons, pill tags and
+     drop-shadowed cards. Education is deliberately not here: it belongs to the
+     CV, where resume-experience already lists it. Styling lives in
+     assets/css/hbx/blocks/zz-custom/style.css under `.masthead`. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content | default dict }}
+{{ $profile := partial "functions/get_author_profile" ($content.username | default "me") }}
+
+{{/* Bio: the block's own `text` wins over the author profile's `bio`. */}}
+{{ $bio := $content.text | default $profile.bio }}
+{{ with $bio }}{{ $bio = printf "%v" . | emojify | $page.RenderString }}{{ end }}
+
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-id">
+      <h1 class="masthead-name"><span class="mark">{{ $profile.title }}</span></h1>
+
+      {{ with $profile.role }}<p class="masthead-role">{{ . | markdownify | emojify }}</p>{{ end }}
+
+      {{ with $profile.affiliations }}
+        <ul class="masthead-affiliations">
+          {{ range . }}
+            {{ $name := .name | default .title }}
+            {{ $url := .url }}
+            {{ with $name }}
+              <li>
+                {{ if $url }}
+                  <a href="{{ $url | safeURL }}" target="_blank" rel="noopener">{{ . }}</a>
+                {{ else }}
+                  {{ . }}
+                {{ end }}
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+
+    {{ with $profile.avatar }}
+      {{ $portrait := .Fill "720x900 Center" }}
+      <img class="masthead-portrait"
+           src="{{ $portrait.RelPermalink }}"
+           width="{{ $portrait.Width }}" height="{{ $portrait.Height }}"
+           alt="{{ $profile.title }}" loading="eager" decoding="async">
+    {{ end }}
+  </div>
+
+  {{ with $bio }}
+    <div class="masthead-bio prose dark:prose-invert">{{ . }}</div>
+  {{ end }}
+
+  <div class="masthead-actions">
+    {{ with $content.button }}
+      {{ if and .text .url }}
+        <a class="linkbtn" href="{{ .url | relLangURL }}">{{ .text }}</a>
+      {{ end }}
+    {{ end }}
+
+    {{ with $profile.links }}
+      <ul class="masthead-links">
+        {{ range . }}
+          {{ $url := .url }}
+          {{ $icon := .icon | default "hero/link" }}
+          {{ $label := .label | default (path.Base $icon | humanize) }}
+          {{ with $url }}
+            <li>
+              <a href="{{ . | safeURL }}" title="{{ $label }}" aria-label="{{ $label }}"
+                 {{ if hasPrefix . "http" }}target="_blank" rel="noopener"{{ end }}>
+                {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='linkicon' aria-hidden='true'") }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+
+</div>

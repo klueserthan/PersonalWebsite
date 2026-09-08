@@ -12,7 +12,7 @@ postnominals:
   - PhD
 status:
   icon: ""
-role: Political Scientist · SNSF Ambizione Grant Holder
+role: Political Scientist
 bio: |
   I study how political institutions, media, and digital platforms allocate attention —
   which problems get taken up, who has the power to force an issue onto the agenda, and
@@ -150,71 +150,71 @@ languages:
 awards:
   - title: "IPZ Research Grant: Influencer-Based Pro-Russian Propaganda"
     awarder: Institut für Politikwissenschaft, Universität Zürich
-    date: "2026-01-01"
+    date: "2026"
     summary: CHF 9,392 · Co-Investigator (with Nina Steffen)
     icon: hero/banknotes
   - title: "VIRENA: Virtual Arena for Research and Education"
     awarder: DIZH Founder Call
-    date: "2025-01-01"
+    date: "2025"
     summary: CHF 150,000 · Co-Investigator (with E. Hoes and F. Gilardi)
     icon: hero/banknotes
   - title: Online Communication Consortium
     awarder: UniEuropa
-    date: "2025-01-01"
+    date: "2025"
     summary: EUR 40,000 · Co-Investigator (with S. Müller, R. Dassonneville, et al.)
     icon: hero/banknotes
   - title: "Beyond Traditional Elites: Influencers' Agenda Setting Powers"
     awarder: Swiss National Science Foundation (SNSF Ambizione)
-    date: "2024-01-01"
+    date: "2024"
     summary: CHF 815,000 · Principal Investigator
     icon: hero/banknotes
   - title: Replicating Foundational Online Survey Experiments
     awarder: University of Zurich
-    date: "2024-01-01"
+    date: "2024"
     summary: CHF 9,000 · with E. Hoes
     icon: hero/banknotes
   - title: Opensource Online Platform Simulator (OOPS)
     awarder: University of Zurich
-    date: "2024-01-01"
+    date: "2024"
     summary: CHF 30,000 · with E. Hoes and F. Gilardi
     icon: hero/banknotes
   - title: Gordon Smith and Vincent Wright Memorial Prize
     awarder: West European Politics
-    date: "2023-01-01"
+    date: "2023"
     summary: "For \"From bureaucratic capacity to legislation: how ministerial resources shape governments' policy-making capabilities\""
     icon: hero/trophy
   - title: Best Paper (runner up)
     awarder: CAP Conference
-    date: "2019-01-01"
+    date: "2019"
     summary: "For \"Beyond Ministerial Portfolios: Investments in Bureaucratic Expertise\""
     icon: hero/trophy
   - title: Best Paper Nomination
     awarder: APSA – European Politics and Society
-    date: "2019-01-01"
+    date: "2019"
     summary: "For \"Ministerial Issue Dominance in Two European Countries\""
     icon: hero/trophy
   - title: Travel Grant
     awarder: School of Business and Social Sciences, Aarhus University
-    date: "2019-01-01"
+    date: "2019"
     summary: DKK 30,000
     icon: hero/banknotes
   - title: Beyond Portfolios (Dissertation Project Funding)
     awarder: School of Business and Social Sciences, Aarhus University
-    date: "2018-01-01"
+    date: "2018"
     summary: EUR 10,054 · Project funding for doctoral research
     icon: hero/banknotes
   - title: Seed Funding
     awarder: School of Business and Social Sciences, Aarhus University
-    date: "2018-01-01"
+    date: "2018"
     summary: DKK 75,000
     icon: hero/banknotes
   - title: Aarhus University PhD Fellowship
     awarder: Aarhus University
-    date: "2017-01-01"
+    date: "2017"
     summary: DKK 1,100,000
     icon: hero/banknotes
   - title: EUI PhD Scholarship (Declined)
     awarder: DAAD
-    date: "2017-01-01"
+    date: "2017"
     summary: EUR 60,000 · Declined in favour of Aarhus University's PhD Fellowship
     icon: hero/banknotes

@@ -34,11 +34,11 @@ hugoblox:
     # Mode: 'light', 'dark', or 'system' (follows OS preference)
     mode: system
     # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
-    pack: "default"
-    # Optional: Override theme pack colors
+    pack: "klueser"
+    # Optional: Override theme pack colors (the pack already sets all three)
     colors:
-      primary: "#1f3a5f" # Tailwind palette name or hex (e.g., "indigo" or "#6366f1")
-      secondary: "#a16207"
+      primary: "" # Tailwind palette name or hex (e.g., "indigo" or "#6366f1")
+      secondary: ""
       neutral: "" # Affects gray utilities (text-gray-*, bg-gray-*)
     # Optional: Mode-specific color overrides
     colors_light: {}
@@ -68,11 +68,11 @@ hugoblox:
   # ────────────────────────────────────────────────────────────────────────────
   layout:
     # Border radius: 'none', 'sm', 'md', 'lg', or 'full'
-    radius: "md"
+    radius: "none"
     # Spacing density: 'compact', 'comfortable', or 'spacious'
     spacing: "comfortable"
     # Avatar shape in author profiles
-    avatar_shape: rounded # circle | square | rounded
+    avatar_shape: square # circle | square | rounded
 
   # ────────────────────────────────────────────────────────────────────────────
   # HEADER
@@ -106,7 +106,7 @@ hugoblox:
     style: minimal # minimal | columns | centered
     language_switcher: false
     # Custom footer text (HTML supported)
-    text: "Department of Political Science, University of Zurich · Funded by an SNSF Ambizione grant"
+    text: "Department of Political Science, University of Zurich. Funded by an SNSF Ambizione grant."
 
   # ────────────────────────────────────────────────────────────────────────────
   # COPYRIGHT
@@ -159,9 +159,11 @@ hugoblox:
     # Table of contents
     toc:
       enable: true
-    # Reading time estimates
+    # Reading time estimates.
+    # NOTE: the kit's page layouts do not read this; the cascade in hugo.yaml
+    # sets the `reading_time` page param, which is what they actually check.
     reading_time:
-      enable: true
+      enable: false
     # Academic citations
     citations:
       style: apa # apa | mla | chicago | ieee

@@ -1,0 +1,10 @@
+{{/* Newsreader, variable roman and true italic.
+
+     The kit's typography partial can only request a `wght` axis, so it cannot
+     ask for italics — and a synthesised italic on a serif looks broken, which
+     matters here because every citation sets its journal name in one. This hook
+     runs after that partial, so these faces win the cascade and the kit's own
+     static request is never downloaded. */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&display=swap">

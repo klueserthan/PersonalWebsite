@@ -5,9 +5,9 @@ event_name: "sogar Theater"
 event_url: "https://www.sogar.ch/programm/saison-23-24/ja-oder-nein-1/"
 location: "Zurich, Switzerland"
 event_start: "2024-04-01T00:00:00Z"
-event_end: "2024-04-01T00:00:00Z"
+event_all_day: true
 authors: [me]
-tags: [Invited]
+tags: [Public Scholarship]
 summary: "Panel discussion"
 featured: false
 ---

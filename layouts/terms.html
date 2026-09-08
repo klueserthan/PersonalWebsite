@@ -1,0 +1,35 @@
+{{ define "main" }}
+
+{{/* Project override of the kit's taxonomy index. The kit set the terms as
+     filled primary-coloured pill buttons, centred; here they are a list of
+     links with the count beside each, on the site's rail. */}}
+
+<div data-pagefind-ignore>
+
+  <header class="page-lede">
+    <h1><span class="mark">{{ .Title }}</span></h1>
+    {{ with .Content }}<div class="prose dark:prose-invert">{{ . }}</div>{{ end }}
+  </header>
+
+  <div class="hbb-section">
+    <ul class="ledger">
+      {{- $type := .Type }}
+      {{- range $key, $value := .Data.Terms.Alphabetical }}
+        {{- with site.GetPage (printf "/%s/%s" $type .Name) }}
+          {{- $count := len .Pages }}
+          {{- if $count }}
+          <li class="ledger-row">
+            <span class="ledger-key">{{ $count }}</span>
+            <span class="ledger-value">
+              <span class="ledger-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></span>
+            </span>
+          </li>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+
+</div>
+
+{{- end -}}

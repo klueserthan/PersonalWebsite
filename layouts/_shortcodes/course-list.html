@@ -1,6 +1,4 @@
-{{/* Course list wrapper. Mirrors the talks/publications list rhythm. */}}
-<div class="course-list not-prose mt-16 w-full">
-  <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-    {{ .Inner }}
-  </div>
-</div>
+{{/* Course list. Same ruled ledger as the talks and publications lists. */}}
+<ul class="ledger course-list not-prose">
+  {{ .Inner }}
+</ul>

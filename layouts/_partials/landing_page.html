@@ -1,0 +1,22 @@
+{{/* Project override of the kit's landing-page renderer.
+
+     Adds a page lede — the title and summary from front matter — above the
+     blocks. Landing pages upstream render no title at all, so /publications/,
+     /events/ and /teaching/ opened straight into a list with nothing naming
+     it. The homepage sets `title: ''` and is skipped. */}}
+
+{{ with .Params.title }}
+  <header class="page-lede">
+    <h1><span class="mark">{{ . | markdownify }}</span></h1>
+    {{ with $.Params.summary }}<p>{{ . | markdownify }}</p>{{ end }}
+  </header>
+{{ end }}
+
+{{- $sections := partial "hbx/sections.html" . -}}
+
+{{ range $index, $block := $sections }}
+  {{/* Do not show sections intended only for the demo site. */}}
+  {{ if or (not $block.demo) ($block.demo | and (eq (os.Getenv "HUGO_BLOX_DEMO") "true")) }}
+    {{ partial "functions/parse_block_v3" (dict "page" $ "block" $block) }}
+  {{ end }}
+{{ end }}
