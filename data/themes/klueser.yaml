@@ -1,0 +1,53 @@
+# Theme pack: "Agenda"
+#
+# The site is about political attention — which problems get onto an agenda and
+# which are ignored. So the palette spends colour the way the subject says
+# attention gets spent: almost nothing, then one unmistakable mark.
+#
+#   ink      near-black with a faint warm cast, so it sits with the marker
+#   paper    off-white, a whisper warm — highlighter on paper, not a UI badge
+#   marker   #FFD400, the accent, applied by hand in zz-custom/style.css
+#
+# `primary` is the ink of each mode, not the marker: every accent the kit paints
+# on its own (nav hover, badges, resume rules) then lands as quiet graphite, and
+# the yellow only appears where this design puts it deliberately.
+
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "Agenda"
+    vendor: "klueser"
+    version: "1.0.0"
+    license: "MIT"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#1a1a17"    # ink
+      secondary: "#ffd400"  # marker
+      neutral: "#6c6a64"    # remaps every text-gray-*/bg-gray-* to a warm grey
+    surfaces:
+      background: "#fbfaf8"
+      foreground: "#1a1a17"
+      header:
+        background: "#fbfaf8"
+        foreground: "#1a1a17"
+      footer:
+        background: "#fbfaf8"
+        foreground: "#6c6a64"
+
+  dark:
+    colors:
+      primary: "#edece7"    # ink, inverted
+      secondary: "#ffd400"
+      neutral: "#8a877e"
+    surfaces:
+      background: "#0f0f0e"
+      foreground: "#edece7"
+      header:
+        background: "#0f0f0e"
+        foreground: "#edece7"
+      footer:
+        background: "#0f0f0e"
+        foreground: "#8a877e"

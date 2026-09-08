@@ -1,4 +1,6 @@
-{{/* Talk/media list entry: no name-first citation, no clickable link. */}}
+{{/* Talk/media list entry: title, then venue, place and date in the monospace
+     register the rest of the site uses for dates and sources. No name-first
+     citation, no link — talks have no landing page worth visiting. */}}
 {{ $item := .item }}
 {{ $page := .page }}
 
@@ -14,13 +16,11 @@
 {{ if $show_location }}{{ with $item.Params.location }}{{ $meta = $meta | append (. | markdownify) }}{{ end }}{{ end }}
 {{ with $date_str }}{{ $meta = $meta | append . }}{{ end }}
 
-{{ $co_presenters := $item.Params.co_presenters }}
-
-<div class="py-3">
-  <div class="font-semibold text-gray-900 dark:text-white">{{ $item.Title | markdownify }}</div>
-  <div class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+<div class="talk-entry">
+  <div class="talk-entry-title">{{ $item.Title | markdownify }}</div>
+  <div class="talk-entry-meta">
     {{ delimit $meta " · " | safeHTML }}
-    {{ with $co_presenters }}
+    {{ with $item.Params.co_presenters }}
       <span class="whitespace-nowrap">&nbsp;· with {{ delimit . ", " }}</span>
     {{ end }}
   </div>

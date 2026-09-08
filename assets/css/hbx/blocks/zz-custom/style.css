@@ -1,90 +1,707 @@
-/* Site-specific styling. Signature: a highlighter mark, i.e. attention made visible. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   "Agenda" — site styling for jonathanklueser.com
+   ═══════════════════════════════════════════════════════════════════════════
+
+   The subject is political attention: which problems get onto an agenda and
+   which never do. The page borrows the register of the document that settles
+   that question — an order paper. Hairline rules instead of cards, a monospace
+   gutter for dates and venues, one measure of running text, and a single
+   yellow marker that lands only on what has actually been given attention:
+   the name, the current page in the nav, a link under the cursor.
+
+   This file is concatenated last into the Tailwind entry point, so its
+   unlayered rules beat the kit's @layer utilities without !important.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --hl: #fde047;
-  --hl-soft: #fef3c7;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --hl: #ca8a04; --hl-soft: #422006; }
-}
-html[data-theme="dark"], .dark { --hl: #ca8a04; --hl-soft: #422006; }
+  /* Ground and ink come from the theme pack (data/themes/klueser.yaml); these
+     are the tokens the pack cannot express. */
+  --paper: #fbfaf8;
+  --ink: #1a1a17;
+  --muted: #6c6a64;
+  --rule: #e4e1da;
+  --marker: #ffd400;
+  --marker-soft: #fff0a8;
+  --marker-ink: #1a1a17; /* text sitting on the marker */
 
-/* Headings: Fraunces at a calmer weight than the template's font-black. */
-h1, h2, h3 { font-weight: 600 !important; letter-spacing: -0.012em; }
+  --measure: 38rem;
+  --column: 52rem; /* ruled lists run wider than running text */
+  --gutter: 7.5rem; /* width of the monospace date column */
+}
 
-/* Page and profile titles get the highlighter run-through. */
-main h1, section h1 {
+/* Dark mode is keyed to `.dark` alone, never to `prefers-color-scheme`. The
+   kit's own theme engine and every `dark:` Tailwind variant switch on that
+   class, which its script sets from the system preference or the toggle. A
+   media query here would flip the ground dark while the kit's utilities stayed
+   light — near-black link text on a near-black page. */
+html.dark {
+  --paper: #0f0f0e;
+  --ink: #edece7;
+  --muted: #8a877e;
+  --rule: #292824;
+  --marker: #ffd400;
+  --marker-soft: #4a3a00;
+}
+
+/* ── Foundations ────────────────────────────────────────────────────────── */
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1.0625rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--marker);
+  color: var(--marker-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--marker);
+  outline-offset: 3px;
+}
+
+/* The monospace label that titles every section — the agenda-item register. */
+.eyebrow,
+.hbb-section .text-3xl.font-bold {
+  font-family: var(--hb-font-code);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: var(--hb-font-tracking-caps, 0.09em);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+}
+
+/* ── The rail ───────────────────────────────────────────────────────────── */
+
+/* Every block upstream centres itself in a box of its own width, so section
+   titles, prose and lists each start at a different x. An agenda sheet has one
+   left margin and everything hangs off it — so every section shares one
+   container, and the boxes inside it stop centring. */
+
+/* The rail itself: one left margin for every section on every page. */
+.hbb-section {
+  padding-inline: max(1.5rem, calc((100% - 72rem) / 2));
+  scroll-margin-top: 4.5rem;
+}
+
+.hbb-section > div:not(.home-section-bg),
+.masthead {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Running text stops at the measure; the boxes holding it stop centring. */
+.hbb-section .max-w-prose {
+  align-items: flex-start;
+  margin-inline: 0;
+  padding-inline: 0;
+  max-width: var(--measure);
+}
+
+.hbb-section > .flex.flex-col.items-center {
+  align-items: flex-start;
+  padding-inline: 0;
+}
+
+.ledger,
+.cv-stack,
+.tokens {
+  max-width: var(--column);
+}
+
+/* Ruled lists run wider than running text. `.course-list` sits inside a
+   markdown block already clamped to the measure, so it overflows to the right
+   of its parent rather than re-centring — the rail stays the left edge. */
+.hbb-section .container.max-w-3xl,
+.list-column,
+.course-list {
+  width: var(--column);
+  max-width: min(100%, calc(100vw - 3rem));
+  margin-inline: 0;
+  margin-top: 0;
+}
+
+.course-list {
+  max-width: calc(100vw - 3rem);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.page-header nav {
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: saturate(150%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+  padding-block: 0.75rem;
+}
+
+.page-header nav a,
+.page-header nav button {
+  font-family: var(--hb-font-nav);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 120ms ease;
+}
+
+.page-header nav a:hover,
+.page-header nav button:hover {
+  color: var(--ink);
+}
+
+/* The current page carries the marker — the one item on the agenda. */
+.page-header nav a.active {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--marker);
+  padding-bottom: 2px;
+}
+
+.page-header nav .theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── The marker ─────────────────────────────────────────────────────────── */
+
+/* Drawn as a stroke, not a rectangle: it starts a shade below the baseline and
+   is clipped unevenly at each end, the way a highlighter actually lands. */
+.mark {
+  position: relative;
   display: inline;
-  text-decoration: underline;
-  text-decoration-color: var(--hl);
-  text-decoration-thickness: 0.32em;
-  text-underline-offset: -0.14em;
-  text-decoration-skip-ink: none;
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% 0.3em;
+  background-position: 0 93%;
+  padding-inline: 0.06em;
 }
 
-/* Links in running text: thin underline, highlighter fill on hover. */
-.prose a:not(.btn) {
+/* ── Masthead (homepage biography block) ────────────────────────────────── */
+
+.masthead {
+  width: min(72rem, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.masthead-top {
+  display: grid;
+  gap: 2.5rem 3rem;
+  grid-template-columns: 1fr;
+  align-items: end;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 820px) {
+  .masthead-top {
+    grid-template-columns: minmax(0, 1fr) 15rem;
+  }
+}
+
+.masthead-name {
+  font-size: clamp(2.75rem, 7.5vw, 5.25rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.masthead-role,
+.masthead-affiliations {
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-role {
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink);
+}
+
+.masthead-affiliations {
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+
+.masthead-affiliations a {
   color: inherit;
-  text-decoration-color: var(--hl);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.masthead-affiliations a:hover {
+  text-decoration-color: var(--marker);
+}
+
+.masthead-portrait {
+  width: 100%;
+  max-width: 15rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.03);
+  transition: filter 240ms ease;
+}
+
+.masthead-portrait:hover {
+  filter: grayscale(0%);
+}
+
+.masthead-bio {
+  max-width: var(--measure);
+  margin-top: 2.5rem;
+  color: var(--ink);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.masthead-bio p {
+  margin: 0 0 1.1em;
+}
+
+.masthead-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.masthead-links {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-links a {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 120ms ease;
+}
+
+.masthead-links a:hover {
+  color: var(--ink);
+}
+
+.linkicon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* One button shape site-wide: a ruled box the marker fills on hover. */
+.linkbtn,
+.print-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--hb-font-code);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  text-decoration: none;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.linkbtn:hover,
+.print-button:hover {
+  background: var(--marker);
+  border-color: var(--marker);
+  color: var(--marker-ink);
+}
+
+.masthead-section {
+  margin-top: 4rem;
+}
+
+/* ── Ledger: a ruled list with a monospace key in the gutter ─────────────── */
+
+.ledger {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 52rem;
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.ledger-row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 640px) {
+  .ledger-row {
+    grid-template-columns: var(--gutter) minmax(0, 1fr);
+  }
+}
+
+.ledger-key {
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  padding-top: 0.2rem;
+}
+
+.ledger-value {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ledger-title {
+  font-weight: 600;
+}
+
+.ledger-sub {
+  color: var(--muted);
+}
+
+.ledger-note {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.ledger-note p {
+  margin: 0;
+}
+
+/* ── Tokens: interests, keywords — rules, not pills ──────────────────────── */
+
+.tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 52rem;
+}
+
+.tokens li {
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  padding: 0.4rem 0.7rem;
+}
+
+/* ── CV page ────────────────────────────────────────────────────────────── */
+
+.cv-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.cv-stack--education-first {
+  flex-direction: column-reverse;
+}
+
+/* Date spans ("Sep 2024 – Present") need more gutter than a bare year. */
+.ledger--dates {
+  --gutter: 10.5rem;
+}
+
+.ledger--dates .ledger-key {
+  white-space: nowrap;
+}
+
+.ledger .tokens {
+  margin-top: 0.15rem;
+}
+
+.ledger-title a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.ledger-title a:hover {
+  text-decoration-color: var(--marker);
+}
+
+/* ── Running text ───────────────────────────────────────────────────────── */
+
+.prose {
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+.prose :where(h1, h2, h3, h4) {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.prose a:not(.linkbtn):not(.btn) {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--marker);
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
   transition: background-color 120ms ease;
 }
-.prose a:not(.btn):hover { background-color: var(--hl-soft); text-decoration-color: transparent; }
 
-/* Citation lists: even spacing either side of the rule, matching the 0.75rem
-   above/below of the talks and teaching rows. The citation view sets a 1rem
-   bottom margin inline, which would otherwise push the rule off-centre. */
-.pub-list-item { margin-bottom: 0 !important; }
-.view-citation > div + div, .pub-list-item + .pub-list-item {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+.prose a:not(.linkbtn):not(.btn):hover {
+  background-color: var(--marker-soft);
+  text-decoration-color: transparent;
 }
 
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-/* Anchor links (e.g. the "Research" nav item -> /#research) land under the sticky header without this. */
-.hbb-section { scroll-margin-top: 5rem; }
-
-/* CV page: "Print / Save as PDF" renders the page itself, chrome-free. */
-@media print {
-  .page-header, footer { display: none !important; }
+.prose mark {
+  background: var(--marker);
+  color: var(--marker-ink);
+  border-radius: 0;
+  padding: 0.05em 0.15em;
 }
 
-/* Course lists sit inside a markdown block, which clamps them to the prose
-   measure. Break out to the same width as the talks and publications lists
-   (max-w-3xl), staying centred on the parent's axis. */
-.course-list {
-  width: min(48rem, calc(100vw - 3rem));
+/* ── Page ledes and article headers ─────────────────────────────────────── */
+
+.page-lede {
+  padding-inline: max(1.5rem, calc((100% - 72rem) / 2));
+  padding-top: 5rem;
+}
+
+.page-lede h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.page-lede p {
+  max-width: var(--measure);
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+}
+
+/* The lede supplies the top air; the first block below it needs less. */
+.page-lede + .hbb-section {
+  padding-top: 3.5rem;
+}
+
+/* Article pages (publications, posts) come from the kit's docs layout, which
+   has its own column. Bring their type into the same system. */
+
+article main > h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% 0.3em;
+  background-position: 0 93%;
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Publication metadata: "Abstract", "Type", "Publication", "Status" are labels,
+   not headings — same monospace register as every other label on the site. */
+article .grid > .font-bold.text-2xl {
+  font-family: var(--hb-font-code);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: var(--hb-font-tracking-caps, 0.09em);
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.35rem;
+}
+
+/* Tag pills and the peer-review badge become tokens. */
+article a[href*="/tags/"],
+article .grid span.inline-flex.rounded-full {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.7rem;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+article a[href*="/tags/"]:hover {
+  border-color: var(--marker);
+  color: var(--ink);
+}
+
+/* ── Publication and talk lists ─────────────────────────────────────────── */
+
+.view-citation {
+  max-width: 52rem;
+}
+
+.pub-list-item {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.pub-list-item .pub-icon {
+  display: none;
+}
+
+.view-citation > div + div,
+.pub-list-item + .pub-list-item {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.pub-list-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 120ms ease;
+}
+
+.pub-list-item a:hover {
+  text-decoration-color: var(--marker);
+  text-decoration-thickness: 2px;
+}
+
+.li-cite-author {
+  color: var(--muted);
+}
+
+/* DOI / CITE / PDF links join the monospace register used for all metadata.
+   `.dark .hb-attachment-link` upstream is two classes, so match its weight. */
+.hb-attachment-link,
+html.dark .hb-attachment-link {
+  font-family: var(--hb-font-code);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.hb-attachment-link:hover,
+html.dark .hb-attachment-link:hover {
+  color: var(--ink);
+  text-decoration-color: var(--marker);
+}
+
+/* Talk entries: title, then venue and date in the monospace register. */
+.talk-entry {
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.talk-entry:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.talk-entry-title {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.talk-entry-meta {
+  margin-top: 0.3rem;
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.talk-entry-meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--marker);
+  text-underline-offset: 3px;
+}
+
+.talk-entry-note {
+  margin-top: 0.4rem;
+  max-width: var(--measure);
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+
+/* The colophon sits at the left margin like everything else, not centred. */
+footer {
+  width: 100%;
   max-width: none;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 6rem 0 0;
+  padding: 2.5rem 0 0;
+  padding-inline: max(1.5rem, calc((100% - 72rem) / 2));
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--hb-font-code);
+  font-size: 0.75rem;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
 }
 
-/* The bio block hard-codes the avatar at 320px inline, which is wider than its
-   4-of-12 column between the md and lg breakpoints, so it runs into the text. */
-.resume-biography .avatar-wrapper,
-.resume-biography img.avatar {
-  max-width: 100%;
-  height: auto !important;
-  aspect-ratio: 1 / 1;
+footer p {
+  text-align: left;
+  margin: 0;
 }
 
-/* "What I work on" continues the biography's text column rather than sitting
-   centred under it: same 12-column grid, same 4-column offset. */
-@media (min-width: 768px) {
-  #research > div:not(.home-section-bg) {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 2rem;
-    /* The bio puts its px-4 on the section, outside the max-w-7xl box; here both
-       live on one element, so the cap has to include the padding to line up. */
-    max-width: calc(80rem + 2rem);
-    margin-inline: auto;
-    padding-inline: 1rem;
+footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+footer a:hover {
+  text-decoration-color: var(--marker);
+}
+
+/* ── CV page ────────────────────────────────────────────────────────────── */
+
+@media print {
+  .page-header,
+  footer,
+  .print-button {
+    display: none;
   }
-  #research > div:not(.home-section-bg) > * {
-    grid-column: 5 / -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none;
+    animation: none;
   }
 }

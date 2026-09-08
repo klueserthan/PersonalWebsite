@@ -1,0 +1,110 @@
+{{/* Project override of Hugo Blox' "Biography 3".
+
+     Renders the same author-profile data as the kit's block, but as a plain
+     left-aligned masthead instead of gradient buttons, pill tags and drop-
+     shadowed cards: name, portrait, bio, then education as a ruled list with
+     the years in a monospace gutter. Styling lives in
+     assets/css/hbx/blocks/zz-custom/style.css under `.masthead`. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content | default dict }}
+{{ $headings := $content.headings | default dict }}
+{{ $profile := partial "functions/get_author_profile" ($content.username | default "me") }}
+
+{{/* Bio: the block's own `text` wins over the author profile's `bio`. */}}
+{{ $bio := $content.text | default $profile.bio }}
+{{ with $bio }}{{ $bio = printf "%v" . | emojify | $page.RenderString }}{{ end }}
+
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-id">
+      <h1 class="masthead-name"><span class="mark">{{ $profile.title }}</span></h1>
+
+      {{ with $profile.role }}<p class="masthead-role">{{ . | markdownify | emojify }}</p>{{ end }}
+
+      {{ with $profile.affiliations }}
+        <ul class="masthead-affiliations">
+          {{ range . }}
+            {{ $name := .name | default .title }}
+            {{ $url := .url }}
+            {{ with $name }}
+              <li>
+                {{ if $url }}
+                  <a href="{{ $url | safeURL }}" target="_blank" rel="noopener">{{ . }}</a>
+                {{ else }}
+                  {{ . }}
+                {{ end }}
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+
+    {{ with $profile.avatar }}
+      {{ $portrait := .Fill "720x900 Center" }}
+      <img class="masthead-portrait"
+           src="{{ $portrait.RelPermalink }}"
+           width="{{ $portrait.Width }}" height="{{ $portrait.Height }}"
+           alt="{{ $profile.title }}" loading="eager" decoding="async">
+    {{ end }}
+  </div>
+
+  {{ with $bio }}
+    <div class="masthead-bio prose dark:prose-invert">{{ . }}</div>
+  {{ end }}
+
+  <div class="masthead-actions">
+    {{ with $content.button }}
+      {{ if and .text .url }}
+        <a class="linkbtn" href="{{ .url | relLangURL }}">{{ .text }}</a>
+      {{ end }}
+    {{ end }}
+
+    {{ with $profile.links }}
+      <ul class="masthead-links">
+        {{ range . }}
+          {{ $url := .url }}
+          {{ $icon := .icon | default "hero/link" }}
+          {{ $label := .label | default (path.Base $icon | humanize) }}
+          {{ with $url }}
+            <li>
+              <a href="{{ . | safeURL }}" title="{{ $label }}" aria-label="{{ $label }}"
+                 {{ if hasPrefix . "http" }}target="_blank" rel="noopener"{{ end }}>
+                {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='linkicon' aria-hidden='true'") }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+
+  {{ with $profile.education }}
+    <section class="masthead-section">
+      <h2 class="eyebrow">{{ $headings.education | default (i18n "education") }}</h2>
+      <ul class="ledger">
+        {{ range . }}
+          <li class="ledger-row">
+            <span class="ledger-key">{{ .year | default .start }}</span>
+            <span class="ledger-value">
+              <span class="ledger-title">{{ .degree | default .area }}</span>
+              {{ with .institution }}<span class="ledger-sub">{{ . }}</span>{{ end }}
+              {{ with .summary }}<span class="ledger-note">{{ . | markdownify }}</span>{{ end }}
+            </span>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{ with $profile.interests }}
+    <section class="masthead-section">
+      <h2 class="eyebrow">{{ $headings.interests | default (i18n "interests") }}</h2>
+      <ul class="tokens">
+        {{ range . }}<li>{{ . | markdownify | emojify }}</li>{{ end }}
+      </ul>
+    </section>
+  {{ end }}
+</div>

@@ -13,18 +13,8 @@ sections:
         text: View CV
         url: /cv/
       headings:
-        about: 'About'
         education: ''
         interests: ''
-    design:
-      background:
-        gradient_mesh:
-          enable: false
-      name:
-        size: lg
-      avatar:
-        size: large
-        shape: rounded
   - block: markdown
     id: research
     content:

@@ -1,0 +1,14 @@
+{{/* "Sep 2017 – Aug 2020", or "… – Present" when `end` is unset.
+     Input: dict with `start`, `end` and `format`. */}}
+{{- $fmt := .format -}}
+{{- with .start -}}
+  {{- $p := try (time .) -}}
+  {{- if $p.Err }}{{ . }}{{ else }}{{ $p.Value | time.Format $fmt }}{{ end -}}
+  {{- " – " -}}
+{{- end -}}
+{{- with .end -}}
+  {{- $p := try (time .) -}}
+  {{- if $p.Err }}{{ . }}{{ else }}{{ $p.Value | time.Format $fmt }}{{ end -}}
+{{- else -}}
+  {{- i18n "present" | default "Present" -}}
+{{- end -}}

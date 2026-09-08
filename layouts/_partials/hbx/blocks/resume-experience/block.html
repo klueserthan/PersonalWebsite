@@ -1,0 +1,61 @@
+{{/* Project override of Hugo Blox' "Experience".
+
+     The kit renders experience and education as a glowing timeline of drop-
+     shadowed cards. This site reads as an agenda sheet, so both become the
+     same ruled ledger the homepage uses: dates in a monospace gutter, entry on
+     the right. Styling: `.ledger` in assets/css/hbx/blocks/zz-custom/style.css. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content | default dict }}
+{{ $design := $block.design | default dict }}
+{{ $profile := partial "functions/get_author_profile" ($content.username | default "me") }}
+{{ $date_format := $design.date_format | default "Jan 2006" }}
+{{ $education_first := $design.is_education_first | default false }}
+
+{{ $experience := or $profile.experience $profile.work }}
+{{ $education := $profile.education }}
+
+<div class="cv-stack{{ if $education_first }} cv-stack--education-first{{ end }}">
+
+  {{ with $experience }}
+    <section>
+      <h2 class="eyebrow">{{ i18n "experience" | default "Experience" }}</h2>
+      <ul class="ledger ledger--dates">
+        {{ range . }}
+          <li class="ledger-row">
+            <span class="ledger-key">
+              {{ partial "hbx/date-span" (dict "start" (.start | default .date_start) "end" (.end | default .date_end) "format" $date_format) }}
+            </span>
+            <span class="ledger-value">
+              <span class="ledger-title">{{ .role | default .position }}</span>
+              {{ with (.org | default .company_name) }}<span class="ledger-sub">{{ . }}</span>{{ end }}
+              {{ with .summary }}<span class="ledger-note">{{ . | emojify | $page.RenderString }}</span>{{ end }}
+            </span>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{ with $education }}
+    <section>
+      <h2 class="eyebrow">{{ i18n "education" | default "Education" }}</h2>
+      <ul class="ledger ledger--dates">
+        {{ range . }}
+          <li class="ledger-row">
+            <span class="ledger-key">
+              {{ partial "hbx/date-span" (dict "start" (.start | default .date_start) "end" (.end | default .date_end) "format" $date_format) }}
+            </span>
+            <span class="ledger-value">
+              <span class="ledger-title">{{ .degree | default .area }}</span>
+              {{ with .institution }}<span class="ledger-sub">{{ . }}</span>{{ end }}
+              {{ with .summary }}<span class="ledger-note">{{ . | emojify | $page.RenderString }}</span>{{ end }}
+            </span>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+</div>
