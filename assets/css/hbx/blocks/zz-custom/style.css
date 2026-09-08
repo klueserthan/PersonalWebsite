@@ -608,10 +608,23 @@ article .grid > .font-bold.text-2xl {
   padding-top: 0.35rem;
 }
 
-/* Tags and the peer-review badge: text, not pills. The badge's outline is a
-   Tailwind `ring`, so it comes off as a box-shadow, not a border. */
-article a[href*="/tags/"],
-article .grid span.inline-flex.rounded-full {
+/* The Status row ("Peer-reviewed" / "Open access") comes off the page. Whether
+   an article is peer reviewed is already carried by the section it sits under
+   on the Publications page and by the Type row above. The `peer_reviewed` and
+   `open_access` params stay in the front matter — they are true, they are set
+   per publication, and nothing else in the kit reads them — so this hides the
+   row rather than deleting the data.
+
+   Both grid cells go: the value cell holds the badge, and `:has(+ ...)` reaches
+   back to the label cell that precedes it. Keyed on `emerald`, which nothing
+   else on the site uses. */
+article .max-w-prose.grid > div:has(> span[class*="emerald"]),
+article .max-w-prose.grid > div:has(+ div > span[class*="emerald"]) {
+  display: none;
+}
+
+/* Tags: text, not pills. */
+article a[href*="/tags/"] {
   border-radius: 0;
   background: transparent;
   border: 0;
