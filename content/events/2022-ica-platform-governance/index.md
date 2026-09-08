@@ -5,7 +5,6 @@ event_name: "ICA Conference"
 location: "Paris, France"
 event_start: "2022-05-01T00:00:00Z"
 event_all_day: true
-show_date: false
 authors: [me]
 tags: [Conference]
 summary: "Conference presentation"

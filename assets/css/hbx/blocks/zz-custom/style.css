@@ -530,6 +530,30 @@ article main > .container.mx-auto {
   max-width: var(--column);
 }
 
+/* The byline puts a 16px avatar beside any author who has one — which here is
+   only the site owner, so it read as a badge on one name in a list of equals.
+   The author card lower down (h-24) keeps its portrait. */
+article main .h-4.w-4.rounded-full {
+  display: none;
+}
+
+/* The kit emits a comma only before authors that have no avatar, leaning on the
+   portrait to separate the rest. With the portrait gone, that separator has to
+   be uniform: drop the conditional one and give every name but the last its
+   own. The flex gap only existed to hold the avatar off the name. */
+article main .mt-4 span.mr-1 {
+  display: none;
+}
+
+article main .mt-4 .group {
+  gap: 0;
+  margin-inline: 0 0.3em; /* the kit's two-sided margin held the avatar off */
+}
+
+article main .mt-4 .group:not(:last-child)::after {
+  content: ",";
+}
+
 /* Publication metadata reads as a ledger: field name in the same gutter the
    rest of the site uses, value beside it. The kit's 200px label column left the
    abstract about 48 characters wide. */

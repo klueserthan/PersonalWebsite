@@ -41,6 +41,19 @@ cascade:
       kind: term
     params:
       show_read_time: false
+  # Publication and talk pages carry a date that is a year or month placeholder
+  # (all are the 1st), and a talk repeats it in its own Date row below. Neither
+  # wants it restated at day precision under the title.
+  - target:
+      path: /publications/**
+      kind: page
+    params:
+      show_date: false
+  - target:
+      path: /events/**
+      kind: page
+    params:
+      show_date: false
 
 ############################
 ## ADVANCED

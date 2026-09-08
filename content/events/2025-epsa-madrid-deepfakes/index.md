@@ -5,7 +5,6 @@ event_name: "European Political Science Association Annual Conference"
 location: "Madrid, Spain"
 event_start: "2025-01-01T00:00:00Z"
 event_all_day: true
-show_date: false
 authors: [me]
 tags: [Conference]
 summary: "Conference presentation"

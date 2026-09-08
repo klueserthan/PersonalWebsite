@@ -5,7 +5,6 @@ event_name: "COPPR @ Zurich"
 location: "Zurich, Switzerland"
 event_start: "2024-04-01T00:00:00Z"
 event_all_day: true
-show_date: false
 authors: [me]
 tags: [Conference]
 summary: "Conference presentation"

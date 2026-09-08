@@ -5,7 +5,6 @@ event_name: "Warwick Business School"
 location: "Coventry, United Kingdom"
 event_start: "2026-06-01T00:00:00Z"
 event_all_day: true
-show_date: false
 authors: [me]
 tags: [Invited]
 summary: "Invited talk"
