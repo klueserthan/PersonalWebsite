@@ -5,6 +5,7 @@ event_name: "Round Table – Dutch Parliament"
 location: "The Hague, Netherlands"
 event_start: "2025-10-01T00:00:00Z"
 event_all_day: true
+show_date: false
 authors: [me]
 tags: [Invited]
 summary: "Submitted expertise"

@@ -1,0 +1,20 @@
+{{/* Project override of the kit's "last updated" line.
+
+     This site builds with enableGitInfo disabled, so .Lastmod falls back to the
+     page's own date unless the front matter sets lastmod explicitly. The line
+     then restated the publication date as an edit date — and at day precision,
+     which on a talk page contradicted the month shown just above it. Show it
+     only when there is a real, different modification date to show. */}}
+
+{{- $show := .Params.show_date_updated | default true -}}
+{{- $is_real := and .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) -}}
+
+{{- if and $show $is_real -}}
+  <time class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400"
+        datetime="{{ time.Format "2006-01-02T15:04:05.000Z" .Lastmod }}">
+    <span>{{ T "last_updated" }}</span>
+    {{ .Lastmod | time.Format (site.Params.hugoblox.locale.date_format | default ":date_long") -}}
+  </time>
+{{- else -}}
+  <div class="mt-16"></div>
+{{- end -}}

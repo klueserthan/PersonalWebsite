@@ -6,6 +6,7 @@ event_url: "https://nltimes.nl/2025/10/01/tiktok-gives-far-right-reach-boost-pro
 location: "The Hague, Netherlands"
 event_start: "2025-10-01T00:00:00Z"
 event_all_day: true
+show_date: false
 authors: [me]
 tags: [Media]
 summary: "Interview (NL Times)"

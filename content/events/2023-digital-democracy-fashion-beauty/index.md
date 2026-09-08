@@ -5,6 +5,7 @@ event_name: "Digital Democracy Workshop"
 location: "Zurich, Switzerland"
 event_start: "2023-10-01T00:00:00Z"
 event_all_day: true
+show_date: false
 authors: [me]
 tags: [Conference]
 summary: "Conference presentation"

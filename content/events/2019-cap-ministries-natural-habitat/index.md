@@ -5,6 +5,7 @@ event_name: "Comparative Agendas Project Annual Conference"
 location: "Budapest, Hungary"
 event_start: "2019-05-01T00:00:00Z"
 event_all_day: true
+show_date: false
 authors: [me]
 tags: [Conference]
 summary: "Conference presentation"

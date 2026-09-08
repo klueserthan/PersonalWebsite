@@ -5,6 +5,7 @@ event_name: "Seminar \"Policy, Bureaucracy, and Organization\""
 location: "Oslo, Norway"
 event_start: "2025-04-01T00:00:00Z"
 event_all_day: true
+show_date: false
 authors: [me]
 tags: [Invited]
 summary: "Invited talk"
