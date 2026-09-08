@@ -26,6 +26,21 @@ cascade:
       path: /slides/**
       kind: page
     outputs: [HTML, present]
+  # Reading time is off site-wide. `hugoblox.content.reading_time.enable` in
+  # params.yaml is documented but inert — single.html and events/page.html both
+  # gate on the page param `.Params.reading_time`, so it has to be cascaded.
+  # Publication and talk pages carry no body text, so every one of them
+  # advertised "0 min read".
+  - target:
+      kind: page
+    params:
+      reading_time: false
+  # Term listings (/tags/…, /publication_types/…) render the card view, which
+  # reads its own `show_read_time` page param rather than the one above.
+  - target:
+      kind: term
+    params:
+      show_read_time: false
 
 ############################
 ## ADVANCED
