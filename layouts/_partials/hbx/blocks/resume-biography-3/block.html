@@ -1,15 +1,14 @@
 {{/* Project override of Hugo Blox' "Biography 3".
 
-     Renders the same author-profile data as the kit's block, but as a plain
-     left-aligned masthead instead of gradient buttons, pill tags and drop-
-     shadowed cards: name, portrait, bio, then education as a ruled list with
-     the years in a monospace gutter. Styling lives in
+     Renders the author-profile data as a plain left-aligned masthead — name,
+     portrait, bio, links — instead of the kit's gradient buttons, pill tags and
+     drop-shadowed cards. Education is deliberately not here: it belongs to the
+     CV, where resume-experience already lists it. Styling lives in
      assets/css/hbx/blocks/zz-custom/style.css under `.masthead`. */}}
 
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
 {{ $content := $block.content | default dict }}
-{{ $headings := $content.headings | default dict }}
 {{ $profile := partial "functions/get_author_profile" ($content.username | default "me") }}
 
 {{/* Bio: the block's own `text` wins over the author profile's `bio`. */}}
@@ -80,23 +79,5 @@
       </ul>
     {{ end }}
   </div>
-
-  {{ with $profile.education }}
-    <section class="masthead-section">
-      <h2 class="section-title">{{ $headings.education | default (i18n "education") }}</h2>
-      <ul class="ledger">
-        {{ range . }}
-          <li class="ledger-row">
-            <span class="ledger-key">{{ .year | default .start }}</span>
-            <span class="ledger-value">
-              <span class="ledger-title">{{ .degree | default .area }}</span>
-              {{ with .institution }}<span class="ledger-sub">{{ . }}</span>{{ end }}
-              {{ with .summary }}<span class="ledger-note">{{ . | markdownify }}</span>{{ end }}
-            </span>
-          </li>
-        {{ end }}
-      </ul>
-    </section>
-  {{ end }}
 
 </div>

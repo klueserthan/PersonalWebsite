@@ -12,9 +12,6 @@ sections:
       button:
         text: View CV
         url: /cv/
-      headings:
-        education: ''
-        interests: ''
   - block: markdown
     id: research
     content:
