@@ -1,0 +1,48 @@
+{{/* Project override of the kit's "card" view.
+
+     Term listings (/tags/…, /publication_types/…) are the only places this view
+     is used on this site, and it shipped as the card kit the rest of the design
+     was built away from: a rounded box per item, a gradient placeholder where no
+     image exists, a pill, and a "Read more →". These lists are the same material
+     as the Publications and Talks pages, so they get the same ledger.
+
+     A term can mix publications and talks, so each row takes its date precision
+     and its context line from the item's own type — matching how that item reads
+     on its own section page. */}}
+
+{{ $item := .item }}
+{{ $is_event := eq $item.Type "events" }}
+{{ $date := $item.Params.event_start | default $item.Date }}
+
+{{/* Talks are recorded at month precision, publications at year — the same
+     precision each one shows on its own list. */}}
+{{ $key := "" }}
+{{ with $date }}
+  {{ $key = (time .) | time.Format (cond $is_event "January 2006" "2006") }}
+{{ end }}
+
+{{ $context := "" }}
+{{ if $is_event }}
+  {{ $parts := slice }}
+  {{ with $item.Params.event_name }}{{ $parts = $parts | append . }}{{ end }}
+  {{ with $item.Params.location }}{{ $parts = $parts | append . }}{{ end }}
+  {{ $context = delimit $parts ", " }}
+{{ else }}
+  {{ $pub := partial "functions/resolve_publication.html" $item }}
+  {{ if not $pub.is_empty }}{{ $context = $pub.display_short }}{{ end }}
+{{ end }}
+
+<li class="ledger-row">
+  <span class="ledger-key">{{ $key }}</span>
+  <span class="ledger-value">
+    <span class="ledger-title"><a href="{{ $item.RelPermalink }}">{{ $item.Title | markdownify }}</a></span>
+    {{ if $context }}
+      <span class="ledger-sub">{{ $context | markdownify }}</span>
+    {{ else }}
+      {{/* The summary only earns a line when there is no venue to name: for a
+           publication it tends to restate the journal, and for a talk the kind
+           of talk the tag already says. */}}
+      {{ with $item.Params.summary }}<span class="ledger-sub">{{ . | markdownify }}</span>{{ end }}
+    {{ end }}
+  </span>
+</li>

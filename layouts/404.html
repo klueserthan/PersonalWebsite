@@ -1,0 +1,36 @@
+{{- define "main" -}}
+
+{{/* Project override of the kit's 404. Same rail and lede as every other page,
+     and the recommendations become the ledger the rest of the site uses. */}}
+
+<div data-pagefind-ignore>
+
+  <header class="page-lede">
+    <h1><span class="mark">{{ i18n "page_not_found" | default "Page not found" }}</span></h1>
+    <p>That page has moved or never existed. The most recent work is below, or use the menu above.</p>
+  </header>
+
+  {{ $query := where (where (where (where site.Pages.ByDate.Reverse "Title" "!=" "") "Kind" "in" (slice "page")) "Params.private" "!=" true) "Permalink" "!=" "" }}
+
+  {{ with first 8 $query }}
+  <div class="hbb-section">
+    <ul class="ledger list-column">
+      {{ range . }}
+        {{ $is_event := eq .Type "events" }}
+        {{ $date := .Params.event_start | default .Date }}
+        <li class="ledger-row">
+          <span class="ledger-key">
+            {{- with $date }}{{ (time .) | time.Format (cond $is_event "January 2006" "2006") }}{{ end -}}
+          </span>
+          <span class="ledger-value">
+            <span class="ledger-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></span>
+          </span>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+</div>
+
+{{- end -}}

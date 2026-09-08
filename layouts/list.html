@@ -1,0 +1,61 @@
+{{ define "main" }}
+
+{{/* Project override of the kit's list layout, used by term pages
+     (/tags/…, /publication_types/…) and by section listings.
+
+     The kit centred a prose column and set the title at text-6xl; this puts the
+     page on the same rail and in the same lede as every other page, and says
+     what the list holds rather than leaving the reader to count. */}}
+
+{{ $pubs := len (where .Pages "Type" "publications") }}
+{{ $talks := len (where .Pages "Type" "events") }}
+{{ $other := sub (len .Pages) (add $pubs $talks) }}
+
+{{ $counts := slice }}
+{{ if $pubs }}{{ $counts = $counts | append (printf "%d %s" $pubs (cond (eq $pubs 1) "publication" "publications")) }}{{ end }}
+{{ if $talks }}{{ $counts = $counts | append (printf "%d %s" $talks (cond (eq $talks 1) "talk" "talks")) }}{{ end }}
+{{ $other_word := cond (eq .Section "blog") "post" "page" }}
+{{ if $other }}{{ $counts = $counts | append (printf "%d %s" $other (cond (eq $other 1) $other_word (printf "%ss" $other_word))) }}{{ end }}
+
+<header class="page-lede">
+  <h1><span class="mark">{{ .Title }}</span></h1>
+  {{ if .Content }}
+    <div class="prose dark:prose-invert">{{ .Content }}</div>
+  {{ else if $counts }}
+    <p>{{ delimit $counts " and " }}.</p>
+  {{ else }}
+    <p>Nothing published here yet.</p>
+  {{ end }}
+</header>
+
+{{ $view := .Params.view | default "card" }}
+{{ $block := . }}
+{{ $paginator := .Paginate .Pages.ByDate.Reverse }}
+{{ $config := dict
+  "columns" (.Params.columns | default 1)
+  "len" (len $paginator.Pages)
+  "fill_image" (.Params.fill_image | default false)
+  "show_date" (.Params.show_date | default true)
+  "show_read_time" (.Params.show_read_time | default false)
+  "show_read_more" (.Params.show_read_more | default false)
+}}
+
+{{/* Check if any pages have author_notes to enable Alpine.js */}}
+{{ range .Pages }}
+  {{ if isset .Params "author_notes" }}
+    {{ $.Store.Set "has_alpine" true }}
+    {{ break }}
+  {{ end }}
+{{ end }}
+
+<div class="hbb-section">
+  {{ partial "functions/render_view" (dict "fragment" "start" "page" $block "item" . "view" $view "config" $config) }}
+  {{ range $index, $item := $paginator.Pages }}
+    {{ partial "functions/render_view" (dict "page" . "item" . "view" $view "index" $index "config" $config) }}
+  {{ end }}
+  {{ partial "functions/render_view" (dict "fragment" "end" "page" $block "item" . "view" $view) }}
+
+  {{ partial "components/paginator" . }}
+</div>
+
+{{ end }}

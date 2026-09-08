@@ -661,6 +661,34 @@ html.dark .hb-attachment-link:hover {
   text-decoration-color: var(--marker);
 }
 
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+
+/* Centred in the kit; here it sits under the list it pages, at the rail. */
+.hbb-section nav > ul.container.mx-auto {
+  justify-content: flex-start;
+  margin-inline: 0;
+  max-width: var(--column);
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
+.hbb-section nav > ul.container.mx-auto li {
+  padding: 0;
+}
+
+.page-link {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 4px;
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+.page-link:hover {
+  color: var(--ink);
+  text-decoration-color: var(--marker);
+}
+
 /* ── CV page ────────────────────────────────────────────────────────────── */
 
 .cv-stack {
