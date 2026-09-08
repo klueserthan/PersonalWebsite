@@ -481,8 +481,68 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 3.5rem;
 }
 
-/* Article pages (publications, posts) come from the kit's docs layout, which
-   has its own column. Bring their type into the same system. */
+/* Article pages (publications, posts) ship with the kit's three-column docs
+   shell: a nav sidebar, the article, and a table of contents. This site has no
+   docs, so on a publication page both side columns render empty and still hold
+   512px of the width — which pushed the article ~190px right of the rail every
+   other page starts on. Put the article back on the rail and drop the columns
+   that have nothing in them. */
+
+.page-body > .mx-auto.flex.max-w-screen-xl {
+  max-width: none;
+  padding-inline: var(--rail);
+}
+
+/* The nav sidebar is a collapsed docs tree with no visible content here. */
+.page-body .hb-sidebar-container {
+  display: none;
+}
+
+/* The table of contents earns its column only when the page has headings. */
+.hb-toc:not(:has(a)) {
+  display: none;
+}
+
+.page-body > .mx-auto.flex.max-w-screen-xl > article {
+  justify-content: flex-start;
+  padding-right: 0;
+}
+
+.page-body > .mx-auto.flex.max-w-screen-xl > article > main {
+  max-width: var(--column);
+  padding-inline: 0;
+}
+
+/* Everything below the article was centred or right-aligned against a centred
+   column. On a left-aligned one it reads as adrift, so it follows the rail. */
+article main .flex.justify-center,
+article main .flex > .place-self-center {
+  justify-content: flex-start;
+  place-self: start;
+}
+
+article main .ltr\:text-right {
+  text-align: left;
+}
+
+article main > .container.mx-auto {
+  margin-inline: 0;
+  max-width: var(--column);
+}
+
+/* Publication metadata reads as a ledger: field name in the same gutter the
+   rest of the site uses, value beside it. The kit's 200px label column left the
+   abstract about 48 characters wide. */
+article .max-w-prose.grid {
+  max-width: var(--column);
+}
+
+@media (min-width: 768px) {
+  article .max-w-prose.grid {
+    grid-template-columns: var(--gutter) minmax(0, 1fr);
+  }
+}
+
 article main > h1 {
   font-size: var(--t-xl);
   font-weight: 500;
