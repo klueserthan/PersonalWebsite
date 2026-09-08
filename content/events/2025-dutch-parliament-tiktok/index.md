@@ -7,7 +7,7 @@ event_start: "2025-10-01T00:00:00Z"
 event_all_day: true
 show_date: false
 authors: [me]
-tags: [Invited]
+tags: [Public Scholarship]
 summary: "Submitted expertise"
 featured: false
 ---

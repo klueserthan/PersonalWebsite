@@ -8,7 +8,7 @@ event_start: "2024-04-01T00:00:00Z"
 event_all_day: true
 show_date: false
 authors: [me]
-tags: [Invited]
+tags: [Public Scholarship]
 summary: "Panel discussion"
 featured: false
 ---
