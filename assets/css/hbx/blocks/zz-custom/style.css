@@ -69,6 +69,7 @@ html.dark {
   --mark-thickness: 0.1em;
   --mark-offset: 100%;
   --mark-pad: 0.12em;
+  --mark-leading: 1.28;
 }
 
 /* ── Foundations ────────────────────────────────────────────────────────── */
@@ -196,6 +197,9 @@ h1, h2, h3, h4, h5, h6 {
   background-position: 0 var(--mark-offset);
   padding-inline: 0.05em;
   padding-bottom: var(--mark-pad);
+  /* Wrapped marked text: the rule needs room under each line, so the marked
+     inline box sets its own leading rather than inheriting a tight one. */
+  line-height: var(--mark-leading, inherit);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
