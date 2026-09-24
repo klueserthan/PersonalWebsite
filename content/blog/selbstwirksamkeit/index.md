@@ -1,5 +1,5 @@
 ---
-title: "Klopp hat die Fahne – aber wer hat den Ton?"
+title: "Es geht doch – nur nicht für Deutschland"
 summary: "Wie oft erzählen deutsche Politikerinnen und Politiker auf Instagram, dass „wir“ etwas bewegen können? Eine Auswertung von knapp 69.000 Posts."
 date: 2026-09-24
 authors: [me]
