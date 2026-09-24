@@ -3,7 +3,7 @@ title: "Klopp hat die Fahne – aber wer hat den Ton?"
 summary: "Wie oft erzählen deutsche Politikerinnen und Politiker auf Instagram, dass „wir“ etwas bewegen können? Eine Auswertung von knapp 69.000 Posts."
 date: 2026-09-24
 authors: [me]
-tags: [Deutsch, Instagram, Politische Kommunikation]
+tags: [Instagram, Politische Kommunikation]
 ---
 
 Am 17. September nutzte Jürgen Klopp seine erste Kadernominierung als Bundestrainer für eine [Grundsatzrede](https://www.stuttgarter-zeitung.de/sport/sport-mix/positiver-patriotismus-grundsatzrede-gegen-rechts-klopp-will-sich-fahne-zurueckholen-79477644.html): Er wolle sich „die Fahne zurückholen“ und von „positivem Patriotismus“ sprechen, stolz und trotzdem „offen und vielfältig und nett“. Die Reaktionen waren groß. Aus der Politik kamen sie auffällig selten.

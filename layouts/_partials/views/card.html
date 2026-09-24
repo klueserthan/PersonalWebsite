@@ -15,10 +15,13 @@
 {{ $date := $item.Params.event_start | default $item.Date }}
 
 {{/* Talks are recorded at month precision, publications at year — the same
-     precision each one shows on its own list. */}}
+     precision each one shows on its own list. Blog posts carry their real
+     publication day. */}}
+{{ $format := cond $is_event "January 2006" "2006" }}
+{{ if eq $item.Type "blog" }}{{ $format = site.Params.hugoblox.locale.date_format | default ":date_long" }}{{ end }}
 {{ $key := "" }}
 {{ with $date }}
-  {{ $key = (time .) | time.Format (cond $is_event "January 2006" "2006") }}
+  {{ $key = (time .) | time.Format $format }}
 {{ end }}
 
 {{ $context := "" }}
