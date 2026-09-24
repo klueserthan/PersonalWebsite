@@ -14,6 +14,9 @@ main:
   - name: Teaching
     url: /teaching/
     weight: 50
+  - name: Blog
+    url: /blog/
+    weight: 55
   - name: CV
     url: /cv/
     weight: 60

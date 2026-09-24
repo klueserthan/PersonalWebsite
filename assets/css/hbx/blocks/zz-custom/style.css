@@ -806,3 +806,9 @@ footer a:hover {
     animation: none;
   }
 }
+
+/* Themed figures: render-image.html emits both variants of foo_light/foo_dark. */
+html.dark .img-light,
+html:not(.dark) .img-dark {
+  display: none;
+}
