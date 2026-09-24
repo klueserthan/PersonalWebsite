@@ -6,9 +6,8 @@ authors: [me]
 tags: [Influencers, Political communication]
 ---
 
-*This article was first published on [Conférence](https://conference.sciencespo.fr/content/2026-05-13/influencers-politics-where-we-do-not-expect-it_IL17JPeLmwpAVFUx3idp), the Sciences Po blog, on 13 May 2026, and is republished here unchanged under its [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/) licence. A [French version](https://conference.sciencespo.fr/content/2026-05-13/les-influenceurs-la-politique-la-ou-on-ne-l-attend-pas_tFCOWpySgjO95t6R345X) is available there.*
+*This article was first published on [Conférence](https://conference.sciencespo.fr/content/2026-05-13/influencers-politics-where-we-do-not-expect-it_IL17JPeLmwpAVFUx3idp), the Sciences Po blog, on 13 May 2026, and is republished here under its [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/) licence, without the introductory paragraph and otherwise unchanged. A [French version](https://conference.sciencespo.fr/content/2026-05-13/les-influenceurs-la-politique-la-ou-on-ne-l-attend-pas_tFCOWpySgjO95t6R345X) is available there.*
 
-**As social media platforms increasingly shape the circulation of political information, public debate now often emerges through spaces initially devoted to entertainment, lifestyle, or everyday routines. [Jonathan Klüser](https://www.jonathanklueser.com/), invited researcher at [Sciences Po](https://www.sciencespo.fr/cevipof/fr/evenements/seminaires-recherche/seminaire-general/), examines how influencers and content creators have become indirect mediators of political discourse, drawing on recent research about parasocial relationships, attention, and digital authority. How does politics change when citizens no longer encounter it primarily through parties, newspapers, or institutions, but through the familiar figures that populate their everyday feeds?**
 
 ## A Recipe, Then Politics
 
