@@ -560,8 +560,9 @@ article main .h-4.w-4.rounded-full {
 /* The kit emits a comma only before authors that have no avatar, leaning on the
    portrait to separate the rest. With the portrait gone, that separator has to
    be uniform: drop the conditional one and give every name but the last its
-   own. The flex gap only existed to hold the avatar off the name. */
-article main .mt-4 span.mr-1 {
+   own. The flex gap only existed to hold the avatar off the name. The date is
+   also a span.mr-1, but always the first child, so it is spared. */
+article main .mt-4 span.mr-1:not(:first-child) {
   display: none;
 }
 
@@ -805,4 +806,10 @@ footer a:hover {
     transition: none;
     animation: none;
   }
+}
+
+/* Themed figures: render-image.html emits both variants of foo_light/foo_dark. */
+html.dark .img-light,
+html:not(.dark) .img-dark {
+  display: none;
 }

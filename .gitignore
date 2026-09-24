@@ -1,4 +1,5 @@
 # Hugo build output and caches
+/blog/
 public/
 resources/
 .hugo_build.lock
