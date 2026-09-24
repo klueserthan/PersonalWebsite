@@ -1,6 +1,6 @@
 ---
 title: "Es geht doch – nur nicht für Deutschland"
-summary: "Jürgen Klopp will die Fahne zurückholen, doch die Politik lässt ihn allein: Dass „wir“ etwas bewegen können, erzählt sie fast nur über die eigene Stadt, kaum über Deutschland. Und auf Instagram zahlt sich Empörung mehr aus als Zuversicht."
+summary: "Jürgen Klopp will die Fahne zurückerobern, doch die Politik lässt ihn allein: Dass „wir“ etwas bewegen können, erzählt sie fast nur über die eigene Stadt, kaum über Deutschland. Eine Auswertung auf Instagram."
 date: 2026-09-24
 authors: [me]
 tags: [Instagram, Politische Kommunikation]
