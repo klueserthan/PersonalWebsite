@@ -1,6 +1,6 @@
 ---
 title: "Es geht doch – nur nicht für Deutschland"
-summary: "Wie oft erzählen deutsche Politikerinnen und Politiker auf Instagram, dass „wir“ etwas bewegen können? Eine Auswertung von knapp 69.000 Posts."
+summary: "Jürgen Klopp will die Fahne zurückholen, doch die Politik lässt ihn allein: Dass „wir“ etwas bewegen können, erzählt sie fast nur über die eigene Stadt, kaum über Deutschland. Und auf Instagram zahlt sich Empörung mehr aus als Zuversicht."
 date: 2026-09-24
 authors: [me]
 tags: [Instagram, Politische Kommunikation]
