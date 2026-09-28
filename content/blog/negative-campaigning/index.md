@@ -1,5 +1,5 @@
 ---
-title: "Wer auf wen schießt – und warum es der Mitte nichts bringt"
+title: "Die Mitte greift an – nur die Falschen"
 summary: "Vier von fünf Angriffen deutscher Politikerinnen und Politiker auf Instagram treffen eine Partei der Mitte, nur jeder siebte die AfD. Dabei bringen Angriffe Likes, aber keine Stimmen, und profitieren tun davon vor allem die Ränder."
 date: 2026-09-28
 authors: [me]
