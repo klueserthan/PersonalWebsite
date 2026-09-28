@@ -6,7 +6,7 @@ authors: [me]
 tags: [Instagram, Politische Kommunikation, Negative Campaigning]
 ---
 
-Ich bin im Ortsvorstand einer deutschen Partei aktiv. Eine Sache habe ich dabei nie wirklich verstanden: warum wir so viel Zeit damit verbringen, über andere zu reden, statt über uns selbst und unsere eigenen Ideen. Natürlich muss die Opposition die Regierung kritisieren, das ist ihre Aufgabe. Und natürlich belebt Konkurrenz das Geschäft. Wer um Stimmen wirbt, muss zeigen, warum er besser ist als die anderen. (Oder es zumindest glaubt.)
+Ich bin im Ortsvorstand einer deutschen Partei aktiv. Eine Sache habe ich bei unserer Außenkommunikation allerdings nie wirklich verstanden: warum wir so viel Zeit damit verbringen, über andere zu reden, statt über uns selbst und unsere eigenen Ideen. Natürlich muss die Opposition die Regierung kritisieren, das ist ihre Aufgabe. Und natürlich belebt Konkurrenz das Geschäft. Wer um Stimmen wirbt, muss zeigen, warum er besser ist als die anderen. (Oder es zumindest glaubt.)
 
 Nur ist die Vorstellung von Politik als Wettbewerb eben nur eine Sichtweise darauf, was Politik eigentlich ausmacht, und historisch ist sie nicht einmal die klassische. Politik als Markt, auf dem ausgehandelt wird, wer was wann und wie bekommt, wie es Harold Lasswell formuliert hat, ist die liberale Lesart. In der republikanischen Tradition von Aristoteles bis Rousseau ist Politik vor allem gemeinsame Sache, ein kooperatives Ringen um das Gemeinwohl. Jürgen Habermas hat diesen Gegensatz [später zugespitzt](https://doi.org/10.1111/j.1467-8675.1994.tb00001.x). Aber dazu mehr in einem späteren Post.
 
